@@ -1,8 +1,57 @@
 import 'dart:math';
 
+import 'package:flutter/material.dart';
+
+Color getLanguageColor(String language) {
+  switch (language) {
+    case 'Python':
+      return Colors.yellow;
+    case 'JavaScript':
+      return Colors.orange;
+    case 'Java':
+      return Colors.red;
+    case 'C++':
+      return Colors.blue;
+    case 'C#':
+      return Colors.purple;
+    case 'Ruby':
+      return Colors.pink;
+    case 'Go':
+      return Colors.cyan;
+    case 'Swift':
+      return Colors.orange;
+    case 'Rust':
+      return Colors.brown;
+    case 'PHP':
+      return Colors.indigo;
+    default:
+      return Colors.grey;
+  }
+}
+
 /// The factor used to calculate level progression.
 // ignore: constant_identifier_names
 const double LEVEL_FACTOR = 0.025;
+
+/// Calculates level for given XP
+int level(int xp) => (LEVEL_FACTOR * sqrt(xp.toDouble())).floor();
+
+/// Gets XP needed for next level
+int xpToNextLevel(int currLevel) => pow(((currLevel + 1) / LEVEL_FACTOR).ceil(), 2).toInt();
+
+/// Gets progress percentage to next level (0-100)
+double levelProgress(int xp) {
+  var currLevel = level(xp);
+  var currLevelXp = xpToNextLevel(currLevel - 1);
+  var nextLevelXp = xpToNextLevel(currLevel);
+
+  var haveXp = (xp) - currLevelXp;
+  var neededXp = nextLevelXp - currLevelXp;
+
+  var progress = (haveXp / neededXp * 100).round().toDouble();
+
+  return progress > 100.0 ? 100.0 : progress;
+}
 
 /// Class representing experience points data organized by date.
 class DateXp {
@@ -86,32 +135,16 @@ class LanguageDetails {
     };
   }
 
-  /// Get the level based on passed or current XP.
-  ///
-  /// If [xp] is provided, calculates level for that XP amount.
-  /// Otherwise uses the total XP.
-  int level([int? xp]) => (LEVEL_FACTOR * sqrt((xp ?? xps).toDouble())).floor();
+  int getLevel() {
+    return level(xps);
+  }
 
-  /// Get the amount of XP required to reach the next level from the passed level or current level.
-  ///
-  /// If [currLevel] is provided, calculates XP needed from that level.
-  /// Otherwise uses the current level + 1.
-  int getXpToNextLevel([int? currLevel]) => pow(((currLevel ?? level() + 1) / LEVEL_FACTOR).ceil(), 2).toInt();
+  int getXpToNextLevel() {
+    return xpToNextLevel(getLevel());
+  }
 
-  /// Get the progress to the next level in percentage.
-  ///
-  /// If [xp] is provided, calculates progress for that XP amount.
-  /// Otherwise uses the total XP.
-  /// Returns a percentage between 0 and 100.
-  int levelProgress([int? xp]) {
-    var currLevel = level(xp);
-    var currLevelXp = getXpToNextLevel(currLevel - 1);
-    var nextLevelXp = getXpToNextLevel(currLevel);
-
-    var haveXp = xps - currLevelXp;
-    var neededXp = nextLevelXp - currLevelXp;
-
-    return (haveXp / neededXp * 100).round();
+  double getLevelProgress() {
+    return levelProgress(xps);
   }
 }
 
@@ -171,32 +204,16 @@ class MachineDetails {
     };
   }
 
-  /// Get the level based on passed or current XP.
-  ///
-  /// If [xp] is provided, calculates level for that XP amount.
-  /// Otherwise uses the total XP.
-  int level([int? xp]) => (LEVEL_FACTOR * sqrt((xp ?? xps).toDouble())).floor();
+  int getLevel() {
+    return level(xps);
+  }
 
-  /// Get the amount of XP required to reach the next level from the passed level or current level.
-  ///
-  /// If [currLevel] is provided, calculates XP needed from that level.
-  /// Otherwise uses the current level + 1.
-  int getXpToNextLevel([int? currLevel]) => pow(((currLevel ?? level() + 1) / LEVEL_FACTOR).ceil(), 2).toInt();
+  int getXpToNextLevel() {
+    return xpToNextLevel(getLevel());
+  }
 
-  /// Get the progress to the next level in percentage.
-  ///
-  /// If [xp] is provided, calculates progress for that XP amount.
-  /// Otherwise uses the total XP.
-  /// Returns a percentage between 0 and 100.
-  int levelProgress([int? xp]) {
-    var currLevel = level(xp);
-    var currLevelXp = getXpToNextLevel(currLevel - 1);
-    var nextLevelXp = getXpToNextLevel(currLevel);
-
-    var haveXp = xps - currLevelXp;
-    var neededXp = nextLevelXp - currLevelXp;
-
-    return (haveXp / neededXp * 100).round();
+  double getLevelProgress() {
+    return levelProgress(xps);
   }
 }
 
@@ -255,33 +272,15 @@ class UserStats {
     };
   }
 
-  /// Get the level based on passed or current XP.
-  ///
-  /// If [xp] is provided, calculates level for that XP amount.
-  /// Otherwise uses the total XP.
-  int level([int? xp]) => (LEVEL_FACTOR * sqrt((xp ?? totalXp).toDouble())).floor();
+  int getLevel() {
+    return level(totalXp);
+  }
 
-  /// Get the amount of XP required to reach the next level from the passed level or current level.
-  ///
-  /// If [currLevel] is provided, calculates XP needed from that level.
-  /// Otherwise uses the current level + 1.
-  int xpToNextLevel([int? currLevel]) => pow((((currLevel ?? level()) + 1) / LEVEL_FACTOR).ceil(), 2).toInt();
+  int getXpToNextLevel() {
+    return xpToNextLevel(getLevel());
+  }
 
-  /// Get the progress to the next level in percentage.
-  ///
-  /// If [xp] is provided, calculates progress for that XP amount.
-  /// Otherwise uses the total XP.
-  /// Returns a percentage between 0 and 100.
-  int levelProgress([int? xp]) {
-    var currLevel = level(xp);
-    var currLevelXp = xpToNextLevel(currLevel - 1);
-    var nextLevelXp = xpToNextLevel(currLevel);
-
-    var haveXp = (xp ?? totalXp) - currLevelXp;
-    var neededXp = nextLevelXp - currLevelXp;
-
-    var progress = (haveXp / neededXp * 100).round();
-
-    return progress > 100 ? 100 : progress;
+  double getLevelProgress() {
+    return levelProgress(totalXp);
   }
 }

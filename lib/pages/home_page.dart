@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:codestats_client/models/user_stats.dart';
+import 'package:codestats_client/widgets/card_widget.dart';
+import 'package:codestats_client/widgets/main_stats_card.dart';
+import 'package:codestats_client/widgets/language_stats_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,11 +19,23 @@ class _HomePageState extends State<HomePage> {
         // backgroundColor: Theme.of(context).colorScheme.top,
         title: Text("Code::Stats"),
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 16.0, bottom: 8.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text("Hello World!")
+            Text("Welcome Harsh!", style: Theme.of(context).textTheme.displaySmall?.copyWith(fontWeight: FontWeight.bold)),
+            SizedBox(height: 30),
+            MainStatsCard(
+              stats: UserStats(
+                totalXp: 229587,
+                machineXp: MachineXp(machines: {}),
+                user: '',
+                newXp: 11013,
+                dateXp: DateXp(dates: {}),
+                languageXp: LanguageXp(languages: {}),
+              )
+            ),
           ],
         ),
       ),

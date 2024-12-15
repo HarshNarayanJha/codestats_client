@@ -43,13 +43,21 @@ class MainStatsCard extends StatelessWidget {
                       minHeight: 20.0
                     ),
                     LinearProgressIndicator(
-                      value: levelProgress(stats.totalXp - stats.newXp) / 100.0,
+                      // value: levelProgress(stats.totalXp - stats.newXp) / 100.0,
+                      value: (
+                        levelProgress(
+                          (stats.totalXp - stats.newXp)
+                          .clamp(xpToNextLevel(stats.getLevel() - 1), xpToNextLevel(stats.getLevel()))
+                        )
+                      ) / 100.0,
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.lightGreen),
                       backgroundColor: Colors.transparent,
                       borderRadius: BorderRadius.circular(8),
                       minHeight: 20.0
                     ),
                     Text('${stats.getLevelProgress()} %', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500)),
+                    // Text('${xpToNextLevel(stats.getLevel() - 1)} %', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500)),
+                    // Text('${stats.totalXp - xpToNextLevel(stats.getLevel() - 1)} %', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500)),
                   ],
                 ),
 

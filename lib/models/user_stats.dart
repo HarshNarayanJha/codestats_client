@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 Color getLanguageColor(String language) {
   switch (language) {
     case 'Python':
-      return Colors.yellow;
+      return Colors.yellow.shade900;
     case 'JavaScript':
       return Colors.orange;
     case 'Java':
@@ -34,18 +34,34 @@ Color getLanguageColor(String language) {
 const double LEVEL_FACTOR = 0.025;
 
 /// Calculates level for given XP
-int level(int xp) => (LEVEL_FACTOR * sqrt(xp.toDouble())).floor();
+int level(int xp) {
+  if (xp <= 0) {
+    return 0;
+  }
+  return (LEVEL_FACTOR * sqrt(xp.toDouble())).floor();
+}
 
 /// Gets XP needed for next level
-int xpToNextLevel(int currLevel) => pow(((currLevel + 1) / LEVEL_FACTOR).ceil(), 2).toInt();
+int xpToNextLevel(int currLevel) {
+  if (currLevel < 0) {
+    return 0;
+  }
+
+  return pow(((currLevel + 1) / LEVEL_FACTOR).ceil(), 2).toInt();
+}
 
 /// Gets progress percentage to next level (0-100)
 double levelProgress(int xp) {
+
+  if (xp <= 0) {
+    return 0;
+  }
+
   var currLevel = level(xp);
   var currLevelXp = xpToNextLevel(currLevel - 1);
   var nextLevelXp = xpToNextLevel(currLevel);
 
-  var haveXp = (xp) - currLevelXp;
+  var haveXp = xp - currLevelXp;
   var neededXp = nextLevelXp - currLevelXp;
 
   var progress = (haveXp / neededXp * 100).round().toDouble();

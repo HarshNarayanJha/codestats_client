@@ -258,6 +258,17 @@ class UserStats {
     );
   }
 
+  factory UserStats.empty() {
+    return UserStats(
+      totalXp: 0,
+      machineXp: MachineXp(machines: {}),
+      user: 'defaultuser',
+      newXp: 0,
+      dateXp: DateXp(dates: {}),
+      languageXp: LanguageXp(languages: {}),
+    );
+  }
+
   /// Converts the UserStats instance to a JSON map.
   Map<String, dynamic> toJson() {
     return {

@@ -1,9 +1,16 @@
+import 'package:codestats_client/providers/stats_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:codestats_client/pages/home_page.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const CodeStatsApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => StatsProvider(),
+      child: const CodeStatsApp(),
+    )
+  );
 }
 
 final _router = GoRouter(

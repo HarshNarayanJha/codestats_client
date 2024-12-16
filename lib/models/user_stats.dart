@@ -1,34 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
-
-Color getLanguageColor(String language) {
-  switch (language) {
-    case 'Python':
-      return Colors.yellow.shade900;
-    case 'JavaScript':
-      return Colors.orange;
-    case 'Java':
-      return Colors.red;
-    case 'C++':
-      return Colors.blue;
-    case 'C#':
-      return Colors.purple;
-    case 'Ruby':
-      return Colors.pink;
-    case 'Go':
-      return Colors.cyan;
-    case 'Swift':
-      return Colors.orange;
-    case 'Rust':
-      return Colors.brown;
-    case 'PHP':
-      return Colors.indigo;
-    default:
-      return Colors.grey;
-  }
-}
-
 /// The factor used to calculate level progression.
 // ignore: constant_identifier_names
 const double LEVEL_FACTOR = 0.025;
@@ -273,6 +244,17 @@ class UserStats {
       dateXp: DateXp.fromJson(json),
       languageXp: LanguageXp.fromJson(json),
       machineXp: MachineXp.fromJson(json),
+    );
+  }
+
+  factory UserStats.sample() {
+    return UserStats(
+      totalXp: 232432,
+      machineXp: MachineXp(machines: {}),
+      user: '',
+      newXp: 13858,
+      dateXp: DateXp(dates: {}),
+      languageXp: LanguageXp(languages: {}),
     );
   }
 

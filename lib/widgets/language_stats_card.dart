@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:codestats_client/models/user_stats.dart';
+import 'package:codestats_client/utils/language_utils.dart';
 
 class LanguageStatsCard extends StatelessWidget {
   const LanguageStatsCard({super.key, required this.stats});

@@ -13,6 +13,7 @@ class MainStatsCard extends StatelessWidget {
       elevation: 6.0,
       // shadowColor: Colors.blueGrey,
       child: InkWell(
+        borderRadius: BorderRadius.circular(12),
         onTap: () {},
         child: Padding(
           padding: const EdgeInsets.all(16),

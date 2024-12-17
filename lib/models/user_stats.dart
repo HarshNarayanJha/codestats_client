@@ -71,6 +71,27 @@ class LanguageXp {
   /// Creates a new LanguageXp instance.
   LanguageXp({required this.languages});
 
+  LanguageDetails getLanguageByIndex(int index) {
+    if (index >= languages.length) {
+      throw IndexError.withLength(index, languages.keys.length);
+    }
+    return languages[languages.keys.toList()[index]]!;
+  }
+
+  LanguageXp sortLanguagesByXp({bool decreasing = true}) {
+    var languagesMap = Map.fromEntries(
+      languages.entries.toList()..sort((a, b) {
+        if (decreasing) {
+          return b.value.xps.compareTo(a.value.xps);
+        } else {
+          return a.value.xps.compareTo(b.value.xps);
+        }
+      })
+    );
+
+    return LanguageXp(languages: languagesMap);
+  }
+
   /// Creates a LanguageXp instance from JSON data.
   factory LanguageXp.fromJson(Map<String, dynamic> json) {
     var languagesMap = <String, LanguageDetails>{};
@@ -242,7 +263,7 @@ class UserStats {
       newXp: json['new_xp'],
       totalXp: json['total_xp'],
       dateXp: DateXp.fromJson(json),
-      languageXp: LanguageXp.fromJson(json),
+      languageXp: LanguageXp.fromJson(json).sortLanguagesByXp(),
       machineXp: MachineXp.fromJson(json),
     );
   }

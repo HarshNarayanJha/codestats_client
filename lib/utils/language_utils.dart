@@ -1,28 +1,109 @@
 import 'package:flutter/material.dart';
 
 Color getLanguageColor(String language) {
-  switch (language) {
-    case 'Python':
-      return Colors.yellow.shade900;
-    case 'JavaScript':
-      return Colors.orange;
-    case 'Java':
-      return Colors.red;
-    case 'C++':
-      return Colors.blue;
-    case 'C#':
-      return Colors.purple;
-    case 'Ruby':
-      return Colors.pink;
-    case 'Go':
-      return Colors.cyan;
-    case 'Swift':
-      return Colors.orange;
-    case 'Rust':
-      return Colors.brown;
-    case 'PHP':
-      return Colors.indigo;
-    default:
-      return Colors.grey;
+  var languageMap = {
+      "TypeScript": "#2b7489",
+      "TypeScript (JSX)": "#2b7489",
+      "Objective-C++": "#6866fb",
+      "Jupyter Notebook": "#DA5B0B",
+      "Dart": "#00B4AB",
+      "Shell": "#89e051",
+      "Nix": "#7e7eff",
+      "Racket": "#22228f",
+      "Elixir": "#6e4a7e",
+      "SAS": "#B34936",
+      "wisp": "#7582D1",
+      "D": "#ba595e",
+      "Kotlin": "#F18E33",
+      "Opal": "#f7ede0",
+      "Crystal": "#776791",
+      "Objective-C": "#438eff",
+      "Ruby": "#701516",
+      "Arc": "#aa2afe",
+      "Brainfuck": "#2F2530",
+      "APL": "#5A8164",
+      "Go": "#375eab",
+      "Visual Basic": "#945db7",
+      "PHP": "#4F5D95",
+      "Glyph": "#e4cc98",
+      "Java": "#b07219",
+      "Scala": "#DC322F",
+      "Makefile": "#427819",
+      "ColdFusion": "#ed2cd6",
+      "Perl": "#0298c3",
+      "Lua": "#000080",
+      "Vue": "#2c3e50",
+      "Verilog": "#b2b7f8",
+      "Factor": "#636746",
+      "Haxe": "#df7900",
+      "Pure Data": "#91de79",
+      "Forth": "#341708",
+      "Red": "#ee0000",
+      "CoffeeScript": "#244776",
+      "HTML": "#e44b23",
+      "Swift": "#ffac45",
+      "C": "#555555",
+      "AutoHotkey": "#6594b9",
+      "Isabelle": "#FEFE00",
+      "Metal": "#8f14e9",
+      "JSONiq": "#40d47e",
+      "Boo": "#d4bec1",
+      "AutoIt": "#1C3552",
+      "Clojure": "#db5855",
+      "Rust": "#dea584",
+      "Prolog": "#74283c",
+      "Tcl": "#e4cc98",
+      "VHDL": "#adb2cb",
+      "Elm": "#60B5CC",
+      "Ada": "#02f88c",
+      "Nu": "#c9df40",
+      "Assembly": "#6E4C13",
+      "Arduino": "#bd79d1",
+      "FLUX": "#88ccff",
+      "NetLogo": "#ff6375",
+      "C#": "#178600",
+      "CSS": "#563d7c",
+      "Emacs Lisp": "#c065db",
+      "EmberScript": "#FFF4F3",
+      "TeX": "#3D6117",
+      "Ren'Py": "#ff7f7f",
+      "Pascal": "#b0ce4e",
+      "F#": "#b845fc",
+      "Diff": "#88dddd",
+      "JavaScript": "#f1e05a",
+      "JavaScript (JSX)": "#f1e05a",
+      "VimL": "#199f4b",
+      "PureScript": "#1D222D",
+      "ABAP": "#E8274B",
+      "Matlab": "#bb92ac",
+      "Slash": "#007eff",
+      "R": "#198ce7",
+      "Erlang": "#B83998",
+      "Scheme": "#1e4aec",
+      "Python": "#3572A5",
+      "Max": "#c4a79c",
+      "Common Lisp": "#3fb68b",
+      "Latte": "#A8FF97",
+      "SystemVerilog": "#DAE1C2",
+      "Chapel": "#8dc63f",
+      "Groovy": "#e69f56",
+      "Dylan": "#6c616e",
+      "E": "#ccce35",
+      "Parrot": "#f3ca0a",
+      "Game Maker Language": "#8fb200",
+      "UnrealScript": "#a54c4d",
+      "Standard ML": "#dc566d",
+      "Slim": "#ff8f77",
+      "Perl6": "#0000fb",
+      "Julia": "#a270ba",
+      "Haskell": "#29b544",
+      "C++": "#f34b7d",
+      "AGS Script": "#B9D9FF",
+  };
+
+  if (languageMap.containsKey(language)) {
+    return Color(int.parse(languageMap[language]!.replaceFirst('#', '0xff')));
   }
+
+  return Colors.grey;
 }

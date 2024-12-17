@@ -1,11 +1,13 @@
-import 'package:codestats_client/providers/stats_provider.dart';
-import 'package:codestats_client/responsive/responsive_layout.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:codestats_client/services/stats_service.dart';
 import 'package:codestats_client/models/user_stats.dart';
 import 'package:codestats_client/widgets/main_stats_card.dart';
 import 'package:codestats_client/widgets/language_stats_card.dart';
+import 'package:codestats_client/providers/stats_provider.dart';
+import 'package:codestats_client/responsive/responsive_layout.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -29,7 +31,7 @@ class _HomePageState extends State<HomePage> {
       context.read<StatsProvider>().setStats(stats);
 
     } catch(e) {
-      print(e);
+      log(e.toString());
     }
   }
 
@@ -47,11 +49,47 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         // backgroundColor: Theme.of(context).colorScheme.sca,
         title: Text("Code::Stats", style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight:FontWeight.bold)),
+        primary: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.sync_rounded),
+            tooltip: "Sync",
+            onPressed: () async {
+              await _fetchStats();
+              if (!context.mounted) return;
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Fetched Latest Stats!"),
+                  showCloseIcon: true,
+                  behavior: SnackBarBehavior.floating,
+                )
+              );
+
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.settings_rounded),
+            tooltip: "Settings",
+            onPressed: () {},
+          )
+        ]
       ),
       body: SafeArea(
-        child: RefreshIndicator(
+        child: RefreshIndicator.adaptive(
+          color: Colors.blueGrey,
           onRefresh: () async {
             await _fetchStats();
+            if (!context.mounted) return;
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text("Fetched Latest Stats!"),
+                showCloseIcon: true,
+                behavior: SnackBarBehavior.floating,
+              )
+            );
+
           },
           child: SingleChildScrollView(
             child: Padding(
@@ -77,16 +115,21 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height: 10),
 
                   ResponsiveLayout(
-                    desktopBody: GridView.count(
+                    desktopBody: GridView.builder(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      crossAxisCount: MediaQuery.of(context).size.width ~/ 300,
-                      childAspectRatio: 1,
-                      crossAxisSpacing: 5,
-                      mainAxisSpacing: 5,
-                      children: stats.languageXp.languages.entries.map((entry) {
-                        return LanguageStatsCard(stats: entry.value);
-                      }).toList(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: MediaQuery.of(context).size.width ~/ 200,
+                        childAspectRatio: 1,
+                        crossAxisSpacing: 5,
+                        mainAxisSpacing: 5,
+                      ),
+                      itemCount: stats.languageXp.languages.length,
+                      itemBuilder: (context, index) {
+                        return LanguageStatsCard(
+                          stats: stats.languageXp.languages[stats.languageXp.languages.keys.toList()[index]]!,
+                        );
+                      },
                     ),
                     mobileBody: ListView.builder(
                       shrinkWrap: true,
@@ -94,9 +137,9 @@ class _HomePageState extends State<HomePage> {
                       itemCount: stats.languageXp.languages.length,
                       itemBuilder: (context, index) {
                         return LanguageStatsCard(
-                          stats: stats.languageXp.languages[stats.languageXp.languages.keys.toList()[index]]!,
+                          stats: stats.languageXp.getLanguageByIndex(index),
                         );
-                      }
+                      },
                     ),
                   ),
                 ],
@@ -105,6 +148,13 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+      bottomNavigationBar: NavigationBar(
+        destinations: [
+          NavigationDestination(icon: Icon(Icons.home_rounded), label: "Home"),
+          NavigationDestination(icon: Icon(Icons.code_rounded), label: "Languages"),
+          NavigationDestination(icon: Icon(Icons.laptop_rounded), label: "Machines"),
+        ],
+      )
     );
   }
 }

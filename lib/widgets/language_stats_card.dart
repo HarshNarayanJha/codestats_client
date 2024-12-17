@@ -11,19 +11,20 @@ class LanguageStatsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: getLanguageColor(stats.name),
-      elevation: 6.0,
-      // shadowColor: Colors.blueGrey,
       child: InkWell(
         onTap: () => {},
+        borderRadius: BorderRadius.circular(12),
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 5.0,
             children: [
-              Text(
-                stats.name,
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w800)
+              FittedBox(
+                child: Text(
+                  stats.name,
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w800)
+                ),
               ),
               SizedBox(height: 5.0),
               Text(
@@ -45,22 +46,21 @@ class LanguageStatsCard extends StatelessWidget {
                     valueColor: AlwaysStoppedAnimation<Color>(Colors.orangeAccent),
                     backgroundColor: Colors.blueGrey,
                     borderRadius: BorderRadius.circular(8),
-                    minHeight: 15.0
+                    minHeight: 20.0
                   ),
                   LinearProgressIndicator(
-                    value: levelProgress(stats.xps - stats.newXps) / 100.0,
+                    value: (
+                      levelProgress(
+                        (stats.xps - stats.newXps)
+                        .clamp(xpToNextLevel(stats.getLevel() - 1), xpToNextLevel(stats.getLevel()))
+                      )
+                    ) / 100.0,
                     valueColor: AlwaysStoppedAnimation<Color>(Colors.lightGreen),
                     backgroundColor: Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
-                    minHeight: 15.0
+                    minHeight: 20.0
                   ),
-                  Text(
-                    '${stats.getLevelProgress()} %',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12),
-                  ),
+                  Text('${stats.getLevelProgress()} %', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500)),
                 ],
               ),
             ],

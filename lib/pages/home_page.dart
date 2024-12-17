@@ -47,7 +47,6 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        // backgroundColor: Theme.of(context).colorScheme.sca,
         title: Text("Code::Stats", style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight:FontWeight.bold)),
         primary: true,
         actions: [
@@ -119,8 +118,8 @@ class _HomePageState extends State<HomePage> {
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: MediaQuery.of(context).size.width ~/ 200,
-                        childAspectRatio: 1,
+                        crossAxisCount: MediaQuery.of(context).size.width ~/ 300,
+                        childAspectRatio: 2,
                         crossAxisSpacing: 5,
                         mainAxisSpacing: 5,
                       ),

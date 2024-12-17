@@ -38,6 +38,7 @@ dependencies:
   http: ^1.2.2
   provider: ^6.1.2
   liquid_pull_to_refresh: ^3.0.1
+  percent_indicator: ^4.2.4
 
 dev_dependencies:
   flutter_test:

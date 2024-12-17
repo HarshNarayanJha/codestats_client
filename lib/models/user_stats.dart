@@ -43,22 +43,30 @@ double levelProgress(int xp) {
 /// Class representing experience points data organized by date.
 class DateXp {
   /// Map of dates to their corresponding XP values.
-  final Map<String, int> dates;
+  final Map<DateTime, int> dates;
 
   /// Creates a new DateXp instance.
   DateXp({required this.dates});
 
   /// Creates a DateXp instance from JSON data.
   factory DateXp.fromJson(Map<String, dynamic> json) {
+    var dates = Map<String, int>.from(json['dates']);
+    var datesMap = Map<DateTime, int>.fromEntries(dates.entries.map((e) {
+      return MapEntry<DateTime, int>(DateTime.parse(e.key), e.value);
+    }));
     return DateXp(
-      dates: Map<String, int>.from(json['dates']),
+      dates: datesMap,
     );
   }
 
   /// Converts the DateXp instance to a JSON map.
   Map<String, dynamic> toJson() {
+    Map<String, int> dateStrings = {};
+    dates.forEach((key, value) {
+      dateStrings[key.toIso8601String()] = value;
+    });
     return {
-      'dates': dates,
+      'dates': dateStrings,
     };
   }
 }
@@ -312,5 +320,17 @@ class UserStats {
 
   double getLevelProgress() {
     return levelProgress(totalXp);
+  }
+
+  DateTime getUserSince() {
+    var dates = dateXp.dates.keys.toList(growable: false);
+    dates.sort((a, b) => a.compareTo(b));
+    return dates.first;
+  }
+
+  DateTime getLastProgrammed() {
+    var dates = dateXp.dates.keys.toList(growable: false);
+    dates.sort((a, b) => a.compareTo(b));
+    return dates.last;
   }
 }

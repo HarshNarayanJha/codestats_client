@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:intl/intl.dart';
 
 /// The factor used to calculate level progression.
 // ignore: constant_identifier_names
@@ -310,6 +311,14 @@ class UserStats {
     };
   }
 
+  String getNewXpF() {
+    return NumberFormat.decimalPattern().format(newXp);
+  }
+
+  String getTotalXpF() {
+    return NumberFormat.decimalPattern().format(totalXp);
+  }
+
   int getLevel() {
     return level(totalXp);
   }
@@ -318,19 +327,35 @@ class UserStats {
     return xpToNextLevel(getLevel());
   }
 
+  String getXpToNextLevelF() {
+    return NumberFormat.decimalPattern().format(getXpToNextLevel());
+  }
+
   double getLevelProgress() {
     return levelProgress(totalXp);
   }
 
-  DateTime getUserSince() {
-    var dates = dateXp.dates.keys.toList(growable: false);
-    dates.sort((a, b) => a.compareTo(b));
-    return dates.first;
+  String getLevelProgressF() {
+    return NumberFormat.percentPattern().format(getLevelProgress() / 100.0);
   }
 
-  DateTime getLastProgrammed() {
+  String getUserSince() {
     var dates = dateXp.dates.keys.toList(growable: false);
+    if (dates.isEmpty) {
+      return DateFormat("MMM dd, yyyy").format(DateTime.fromMillisecondsSinceEpoch(73474936873));
+    }
+
     dates.sort((a, b) => a.compareTo(b));
-    return dates.last;
+    return DateFormat("MMM dd, yyyy").format(dates.first);
+  }
+
+  String getLastProgrammed() {
+    var dates = dateXp.dates.keys.toList(growable: false);
+    if (dates.isEmpty) {
+      return DateFormat("MMM dd, yyyy").format(DateTime.fromMillisecondsSinceEpoch(349759326400));
+    }
+
+    dates.sort((a, b) => a.compareTo(b));
+    return DateFormat("MMM dd, yyyy").format(dates.last);
   }
 }

@@ -39,6 +39,7 @@ dependencies:
   provider: ^6.1.2
   liquid_pull_to_refresh: ^3.0.1
   percent_indicator: ^4.2.4
+  intl: ^0.20.1
 
 dev_dependencies:
   flutter_test:

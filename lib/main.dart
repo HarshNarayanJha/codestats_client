@@ -1,10 +1,18 @@
 import 'package:codestats_client/providers/stats_provider.dart';
+import 'package:codestats_client/router/router.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:codestats_client/pages/home_page.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl_standalone.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  try {
+    await findSystemLocale();
+    await initializeDateFormatting();
+  } catch (e) {
+    debugPrint('Failed to initialize locale: $e');
+  }
+
   runApp(
     ChangeNotifierProvider(
       create: (context) => StatsProvider(),
@@ -12,17 +20,6 @@ void main() {
     )
   );
 }
-
-final _router = GoRouter(
-  initialLocation: '/',
-  routes: [
-    GoRoute(
-      name: 'name',
-      path: '/',
-      builder: (context, state) => HomePage()
-    ),
-  ]
-);
 
 class CodeStatsApp extends StatelessWidget {
   const CodeStatsApp({super.key});
@@ -42,7 +39,7 @@ class CodeStatsApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch(brightness: Brightness.dark, primarySwatch: Colors.blueGrey),
         useMaterial3: true,
       ),
-      routerConfig: _router
+      routerConfig: router
     );
   }
 }

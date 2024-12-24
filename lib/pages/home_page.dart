@@ -1,6 +1,8 @@
 import 'dart:developer';
 
+import 'package:codestats_client/router/router.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:codestats_client/services/stats_service.dart';
 import 'package:codestats_client/models/user_stats.dart';
@@ -70,7 +72,7 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: Icon(Icons.settings_rounded),
             tooltip: "Settings",
-            onPressed: () {},
+            onPressed: () => context.go(Routes.settingsPage),
           )
         ]
       ),
@@ -147,13 +149,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      bottomNavigationBar: NavigationBar(
-        destinations: [
-          NavigationDestination(icon: Icon(Icons.home_rounded), label: "Home"),
-          NavigationDestination(icon: Icon(Icons.code_rounded), label: "Languages"),
-          NavigationDestination(icon: Icon(Icons.laptop_rounded), label: "Machines"),
-        ],
-      )
     );
   }
 }

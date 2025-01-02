@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
-final _sectionNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'section');
+final _homeNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'home');
+final _languagesNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'languages');
+final _machinesNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'machines');
 
 class Routes {
   Routes._();
@@ -14,13 +16,13 @@ class Routes {
   static const String homePage = "/home";
   static const String languagesPage = "/languages";
   static const String machinesPage = "/machines";
-  static const String subSettingsPage = "settings";
-  static const String settingsPage = "/home/settings";
+  static const String settingsPage = "/settings";
 }
 
 final router = GoRouter(
   navigatorKey: _rootNavigatorKey,
   initialLocation: Routes.homePage,
+  debugLogDiagnostics: true,
 
   routes: [
     StatefulShellRoute.indexedStack(
@@ -29,7 +31,7 @@ final router = GoRouter(
       ),
       branches: [
         StatefulShellBranch(
-          navigatorKey: _sectionNavigatorKey,
+          navigatorKey: _homeNavigatorKey,
           routes: [
             GoRoute(
               name: 'home',
@@ -41,22 +43,11 @@ final router = GoRouter(
                 );
               },
               // builder: (context, state) => const HomePage(),
-              routes: [
-                GoRoute(
-                  name: 'settings',
-                  path: Routes.subSettingsPage,
-                  pageBuilder: (context, state) {
-                    return MaterialPage(
-                      key: state.pageKey,
-                      child: const Placeholder(),
-                    );
-                  },
-                ),
-              ]
             ),
           ],
         ),
         StatefulShellBranch(
+          navigatorKey: _languagesNavigatorKey,
           routes: [
             GoRoute(
               name: 'languages',
@@ -71,6 +62,7 @@ final router = GoRouter(
           ]
         ),
         StatefulShellBranch(
+          navigatorKey: _machinesNavigatorKey,
           routes: [
             GoRoute(
               name: 'machines',
@@ -85,6 +77,17 @@ final router = GoRouter(
           ]
         ),
       ]
-    )
+    ),
+    GoRoute(
+      parentNavigatorKey: _rootNavigatorKey,
+      name: 'settings',
+      path: Routes.settingsPage,
+      pageBuilder: (context, state) {
+        return MaterialPage(
+          key: state.pageKey,
+          child: const Placeholder(),
+        );
+      },
+    ),
   ]
 );

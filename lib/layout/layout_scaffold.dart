@@ -9,12 +9,16 @@ class LayoutScaffold extends StatelessWidget {
 
   final StatefulNavigationShell navigationShell;
 
+  void _goBranch(int index) {
+    navigationShell.goBranch(index, initialLocation: index == navigationShell.currentIndex);
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
     body: navigationShell,
     bottomNavigationBar: NavigationBar(
       selectedIndex: navigationShell.currentIndex,
-      onDestinationSelected: navigationShell.goBranch,
+      onDestinationSelected: _goBranch,
       destinations: [
         NavigationDestination(icon: Icon(Icons.home_rounded), label: "Home"),
         NavigationDestination(icon: Icon(Icons.code_rounded), label: "Languages"),

@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: Icon(Icons.settings_rounded),
             tooltip: "Settings",
-            onPressed: () => context.go(Routes.settingsPage),
+            onPressed: () => context.push(Routes.settingsPage),
           )
         ]
       ),

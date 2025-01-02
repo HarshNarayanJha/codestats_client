@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:codestats_client/router/router.dart';
 import 'package:codestats_client/widgets/day_stats.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:codestats_client/services/stats_service.dart';
 import 'package:codestats_client/models/user_stats.dart';
@@ -150,6 +152,40 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
                   ),
+
+                  SizedBox(height: 30),
+
+                  Text(
+                    "Your Year in a Glance",
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 10),
+
+                  HeatMap(
+                    datasets: stats.dateXp.dates,
+                    colorMode: ColorMode.opacity,
+                    // startDate: stats.dateXp.getLastProgrammed().subtract(Duration(days: 365)),
+                    // endDate: DateTime.now(),
+                    colorsets: {
+                      0: Colors.lightBlueAccent.shade400,
+                    },
+                    defaultColor: Colors.grey.shade300,
+                    size: 16,
+                    margin: EdgeInsets.all(1),
+                    borderRadius: 20.0,
+                    scrollable: true,
+                    showColorTip: false,
+                    onClick: (p) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                              NumberFormat.compact(explicitSign: false).format(stats.dateXp.dates[p])
+                          ),
+                          showCloseIcon: true,
+                        )
+                      );
+                    }
+                  )
                 ],
               ),
             ),

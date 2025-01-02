@@ -40,6 +40,7 @@ dependencies:
   liquid_pull_to_refresh: ^3.0.1
   percent_indicator: ^4.2.4
   intl: ^0.20.1
+  flutter_heatmap_calendar: ^1.0.5
 
 dev_dependencies:
   flutter_test:

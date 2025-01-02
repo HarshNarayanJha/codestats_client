@@ -49,6 +49,33 @@ class DateXp {
   /// Creates a new DateXp instance.
   DateXp({required this.dates});
 
+  Map<DateTime, int> getYearDates(int year) {
+    return Map<DateTime, int>.fromEntries(dates.entries.where((element) => element.key.year == year));
+  }
+
+  /// Returns the first date xp was sent
+  DateTime getUserSince() {
+    // ignore: no_leading_underscores_for_local_identifiers
+    var _dates = dates.keys.toList(growable: false);
+    if (dates.isEmpty) {
+      return DateTime.fromMillisecondsSinceEpoch(73474936873);
+    }
+
+    _dates.sort((a, b) => a.compareTo(b));
+    return _dates.first;
+  }
+
+  DateTime getLastProgrammed() {
+    // ignore: no_leading_underscores_for_local_identifiers
+    var _dates = dates.keys.toList(growable: false);
+    if (_dates.isEmpty) {
+      return DateTime.fromMillisecondsSinceEpoch(349759326400);
+    }
+
+    _dates.sort((a, b) => a.compareTo(b));
+    return _dates.last;
+  }
+
   /// Creates a DateXp instance from JSON data.
   factory DateXp.fromJson(Map<String, dynamic> json) {
     var dates = Map<String, int>.from(json['dates']);
@@ -410,23 +437,11 @@ class UserStats {
     return NumberFormat.percentPattern().format(getLevelProgress() / 100.0);
   }
 
-  String getUserSince() {
-    var dates = dateXp.dates.keys.toList(growable: false);
-    if (dates.isEmpty) {
-      return DateFormat("MMM dd, yyyy").format(DateTime.fromMillisecondsSinceEpoch(73474936873));
-    }
-
-    dates.sort((a, b) => a.compareTo(b));
-    return DateFormat("MMM dd, yyyy").format(dates.first);
+  String getUserSinceF() {
+    return DateFormat("MMM dd, yyyy").format(dateXp.getUserSince());
   }
 
-  String getLastProgrammed() {
-    var dates = dateXp.dates.keys.toList(growable: false);
-    if (dates.isEmpty) {
-      return DateFormat("MMM dd, yyyy").format(DateTime.fromMillisecondsSinceEpoch(349759326400));
-    }
-
-    dates.sort((a, b) => a.compareTo(b));
-    return DateFormat("MMM dd, yyyy").format(dates.last);
+  String getLastProgrammedF() {
+    return DateFormat("MMM dd, yyyy").format(dateXp.getLastProgrammed());
   }
 }

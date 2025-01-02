@@ -69,8 +69,8 @@ class MainStatsCard extends StatelessWidget {
                     '${stats.getXpToNextLevel() - (stats.totalXp - xpToNextLevel(stats.getLevel() - 1))} XP to next level',
                     style: Theme.of(context).primaryTextTheme.bodySmall?.copyWith(fontWeight: FontWeight.w400)
                   ),
-                  Text("User Since: ${stats.getUserSince()}", style: TextStyle(color: Colors.grey.shade400)),
-                  Text("Last programmed on: ${stats.getLastProgrammed()}", style: TextStyle(color: Colors.grey.shade400)),
+                  Text("User Since: ${stats.getUserSinceF()}", style: TextStyle(color: Colors.grey.shade400)),
+                  Text("Last programmed on: ${stats.getLastProgrammedF()}", style: TextStyle(color: Colors.grey.shade400)),
                 ],
               ),
             ],

@@ -196,11 +196,39 @@ class MachineXp {
   /// Creates a new MachineXp instance.
   MachineXp({required this.machines});
 
+  Map<String, MachineDetails> getTopMachines({int top = 5}) {
+  var sortedMachines = Map.fromEntries(
+      machines.entries.toList().take(top)
+    );
+    return sortedMachines;
+  }
+
+  MachineDetails getMachineByIndex(int index) {
+    if (index >= machines.length) {
+      throw IndexError.withLength(index, machines.keys.length);
+    }
+    return machines[machines.keys.toList()[index]]!;
+  }
+
+  MachineXp sortMachinesByXp({bool decreasing = true}) {
+    var languagesMap = Map.fromEntries(
+      machines.entries.toList()..sort((a, b) {
+        if (decreasing) {
+          return b.value.xps.compareTo(a.value.xps);
+        } else {
+          return a.value.xps.compareTo(b.value.xps);
+        }
+      })
+    );
+
+    return MachineXp(machines: languagesMap);
+  }
+
   /// Creates a MachineXp instance from JSON data.
   factory MachineXp.fromJson(Map<String, dynamic> json) {
     var machinesMap = <String, MachineDetails>{};
     json['machines'].forEach((key, value) {
-      machinesMap[key] = MachineDetails.fromJson(value);
+      machinesMap[key] = MachineDetails.fromJson(value, key);
     });
     return MachineXp(machines: machinesMap);
   }
@@ -219,6 +247,9 @@ class MachineXp {
 
 /// Class representing the experience points details for a specific machine/platform.
 class MachineDetails {
+  /// Machine name
+  final String name;
+
   /// The amount of new XP earned in the past 12 hours.
   final int newXps;
 
@@ -226,11 +257,12 @@ class MachineDetails {
   final int xps;
 
   /// Creates a new MachineDetails instance.
-  MachineDetails({required this.newXps, required this.xps});
+  MachineDetails({required this.name, required this.newXps, required this.xps});
 
   /// Creates a MachineDetails instance from JSON data.
-  factory MachineDetails.fromJson(Map<String, dynamic> json) {
+  factory MachineDetails.fromJson(Map<String, dynamic> json, String key) {
     return MachineDetails(
+      name: key,
       newXps: json['new_xps'] ?? 0,
       xps: json['xps'] ?? 0,
     );
@@ -254,6 +286,22 @@ class MachineDetails {
 
   double getLevelProgress() {
     return levelProgress(xps);
+  }
+
+  String getNewXpF() {
+    return NumberFormat.decimalPattern().format(newXps);
+  }
+
+  String getTotalXpF() {
+    return NumberFormat.decimalPattern().format(xps);
+  }
+
+  String getXpToNextLevelF() {
+    return NumberFormat.decimalPattern().format(getXpToNextLevel());
+  }
+
+  String getLevelProgressF() {
+    return NumberFormat.percentPattern().format(getLevelProgress() / 100.0);
   }
 }
 

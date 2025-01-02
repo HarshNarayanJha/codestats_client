@@ -66,7 +66,7 @@ class MainStatsCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${stats.getXpToNextLevel() - stats.totalXp} XP to next level',
+                    '${stats.getXpToNextLevel() - (stats.totalXp - xpToNextLevel(stats.getLevel() - 1))} XP to next level',
                     style: Theme.of(context).primaryTextTheme.bodySmall?.copyWith(fontWeight: FontWeight.w400)
                   ),
                   Text("User Since: ${stats.getUserSince()}", style: TextStyle(color: Colors.grey.shade400)),

@@ -33,21 +33,21 @@ class LanguageStatsCard extends StatelessWidget {
                       FittedBox(
                         child: Text(
                           stats.name,
-                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w800)
+                          style: Theme.of(context).primaryTextTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w800)
                         ),
                       ),
                       SizedBox(height: 5.0),
                       Text(
                         'Level ${stats.getLevel()}',
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)
+                        style: Theme.of(context).primaryTextTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)
                       ),
                       Text(
-                        '${stats.xps.toString()} XP (+ ${stats.newXps.toString()} XP)',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w400)
+                        '${stats.getTotalXpF()} XP (+ ${stats.getNewXpF()} XP)',
+                        style: Theme.of(context).primaryTextTheme.bodySmall?.copyWith(fontWeight: FontWeight.w400)
                       ),
                       Text(
                         '${stats.getXpToNextLevel() - (stats.xps - xpToNextLevel(stats.getLevel() - 1))} XP to next level',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w400)
+                        style: Theme.of(context).primaryTextTheme.bodySmall?.copyWith(fontWeight: FontWeight.w400)
                       ),
                     ],
                   ),
@@ -77,7 +77,7 @@ class LanguageStatsCard extends StatelessWidget {
                         radius: 48,
                         lineWidth: 16.0,
                         animation: true,
-                        center: Text('${stats.getLevelProgress().ceil()}%', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500)),
+                        center: Text(stats.getLevelProgressF(), style: Theme.of(context).primaryTextTheme.labelLarge?.copyWith(fontWeight: FontWeight.w500)),
                       ),
                     ],
                   ),

@@ -80,6 +80,13 @@ class LanguageXp {
   /// Creates a new LanguageXp instance.
   LanguageXp({required this.languages});
 
+  Map<String, LanguageDetails> getTopLanguages({int top = 5}) {
+    var sortedLanguages = Map.fromEntries(
+      languages.entries.toList().take(top)
+    );
+    return sortedLanguages;
+  }
+
   LanguageDetails getLanguageByIndex(int index) {
     if (index >= languages.length) {
       throw IndexError.withLength(index, languages.keys.length);
@@ -162,6 +169,22 @@ class LanguageDetails {
 
   double getLevelProgress() {
     return levelProgress(xps);
+  }
+
+  String getNewXpF() {
+    return NumberFormat.decimalPattern().format(newXps);
+  }
+
+  String getTotalXpF() {
+    return NumberFormat.decimalPattern().format(xps);
+  }
+
+  String getXpToNextLevelF() {
+    return NumberFormat.decimalPattern().format(getXpToNextLevel());
+  }
+
+  String getLevelProgressF() {
+    return NumberFormat.percentPattern().format(getLevelProgress() / 100.0);
   }
 }
 

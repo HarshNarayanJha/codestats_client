@@ -25,11 +25,11 @@ class MainStatsCard extends StatelessWidget {
               Row(),
               Text(
                 'Level ${stats.getLevel()}',
-                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontWeight: FontWeight.w900)
+                style: Theme.of(context).primaryTextTheme.displaySmall?.copyWith(fontWeight: FontWeight.w900)
               ),
               Text(
                 '${stats.getTotalXpF()} XP (+ ${stats.getNewXpF()} XP)',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w400)
+                style: Theme.of(context).primaryTextTheme.titleMedium?.copyWith(fontWeight: FontWeight.w400)
               ),
               SizedBox(height: 5.0),
 
@@ -56,7 +56,7 @@ class MainStatsCard extends StatelessWidget {
                     barRadius: Radius.circular(8),
                     lineHeight: 20.0,
                     animation: true,
-                    center: Text(stats.getLevelProgressF(), style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500)),
+                    center: Text(stats.getLevelProgressF(), style: Theme.of(context).primaryTextTheme.labelLarge?.copyWith(fontWeight: FontWeight.w500)),
                   ),
                 ],
               ),
@@ -67,7 +67,7 @@ class MainStatsCard extends StatelessWidget {
                 children: [
                   Text(
                     '${stats.getXpToNextLevel() - stats.totalXp} XP to next level',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w400)
+                    style: Theme.of(context).primaryTextTheme.bodySmall?.copyWith(fontWeight: FontWeight.w400)
                   ),
                   Text("User Since: ${stats.getUserSince()}", style: TextStyle(color: Colors.grey.shade400)),
                   Text("Last programmed on: ${stats.getLastProgrammed()}", style: TextStyle(color: Colors.grey.shade400)),

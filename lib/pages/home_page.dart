@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:codestats_client/router/router.dart';
+import 'package:codestats_client/widgets/day_stats.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -109,6 +110,12 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SizedBox(height: 30),
 
+                  DayStats(stats: stats),
+
+                  SizedBox(height: 30),
+                  Divider(thickness: 0.5),
+                  SizedBox(height: 30),
+
                   Text(
                     "Languages you speak!",
                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.bold),
@@ -125,17 +132,17 @@ class _HomePageState extends State<HomePage> {
                         crossAxisSpacing: 5,
                         mainAxisSpacing: 5,
                       ),
-                      itemCount: stats.languageXp.languages.length,
+                      itemCount: stats.languageXp.getTopLanguages().length,
                       itemBuilder: (context, index) {
                         return LanguageStatsCard(
-                          stats: stats.languageXp.languages[stats.languageXp.languages.keys.toList()[index]]!,
+                          stats: stats.languageXp.getTopLanguages()[stats.languageXp.getTopLanguages().keys.toList()[index]]!,
                         );
                       },
                     ),
                     mobileBody: ListView.builder(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      itemCount: stats.languageXp.languages.length,
+                      itemCount: stats.languageXp.getTopLanguages().length,
                       itemBuilder: (context, index) {
                         return LanguageStatsCard(
                           stats: stats.languageXp.getLanguageByIndex(index),

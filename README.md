@@ -6,7 +6,9 @@ Original Service @[codestats.net](https://codestats.net/)
 
 ## Screenshots (WIP)
 
-![Home Page](images/home.png)
-![Heatmap](images/heatmap.png)
-![Languages](images/langs.png)
-![Machines](images/machines.png)
+| Screenshot | Description |
+|------------|-------------|
+| <img src="images/home.png" width="200px" alt="Home Page"/> | Home Page |
+| <img src="images/heatmap.png" width="200px" alt="Heatmap"/> | Heatmap |
+| <img src="images/langs.png" width="200px" alt="Languages"/> | Languages |
+| <img src="images/machines.png" width="200px" alt="Machines"/> | Machines |

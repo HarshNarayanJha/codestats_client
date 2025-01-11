@@ -2,6 +2,7 @@ import 'package:codestats_client/layout/layout_scaffold.dart';
 import 'package:codestats_client/pages/home_page.dart';
 import 'package:codestats_client/pages/languages_page.dart';
 import 'package:codestats_client/pages/machines_page.dart';
+import 'package:codestats_client/pages/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -85,7 +86,7 @@ final router = GoRouter(
       pageBuilder: (context, state) {
         return MaterialPage(
           key: state.pageKey,
-          child: const Placeholder(),
+          child: const SettingsPage(),
         );
       },
     ),

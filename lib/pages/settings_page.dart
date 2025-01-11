@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
   static const keyDarkMode = "dark_mode";
@@ -16,6 +16,8 @@ class _SettingsPageState extends State<SettingsPage> {
   int? darkMode;
   String? username;
 
+  final TextEditingController _usernameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,20 +30,21 @@ class _SettingsPageState extends State<SettingsPage> {
             leading: const Icon(Icons.dark_mode),
             title: const Text('Dark Mode'),
             trailing: SegmentedButton<int>(
-              segments: const [
+              segments: [
                 ButtonSegment(
                   value: 0,
-                  icon: Icon(Icons.light_mode),
+                  icon: Icon(Icons.light_mode)//, color: Theme.of(context).primaryIconTheme.color),
                 ),
                 ButtonSegment(
                   value: 1,
-                  icon: Icon(Icons.smartphone),
+                  icon: Icon(Icons.smartphone)//, color: Theme.of(context).primaryIconTheme.color),
                 ),
                 ButtonSegment(
                   value: 2,
-                  icon: Icon(Icons.dark_mode),
+                  icon: Icon(Icons.dark_mode)//, color: Theme.of(context).primaryIconTheme.color),
                 ),
               ],
+              showSelectedIcon: false,
               selected: {darkMode ?? 1},
               onSelectionChanged: (Set<int> newSelection) {
                 setState(() {
@@ -59,6 +62,7 @@ class _SettingsPageState extends State<SettingsPage> {
               width: 125,
               child: TextField(
                 autocorrect: false,
+                controller: _usernameController,
                 onSubmitted: (value) {
                   username = value;
                   saveSettings();
@@ -72,11 +76,9 @@ class _SettingsPageState extends State<SettingsPage> {
             trailing: const Icon(Icons.chevron_right),
             onTap: () {},
           ),
-          ListTile(
-            leading: const Icon(Icons.info),
-            title: const Text('About'),
-            trailing: const Icon(Icons.chevron_right),
-            onTap: () {},
+          AboutListTile(
+            icon: const Icon(Icons.info),
+            applicationVersion: "v0.0.1",
           ),
         ],
       ),
@@ -90,14 +92,17 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Future<void> loadSettings() async {
-    // final prefs = await SharedPreferences.getInstance();
-    // darkMode = prefs.getInt(SettingsPage.keyDarkMode);
-    // username = prefs.getString(SettingsPage.keyUsername);
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      darkMode = prefs.getInt(SettingsPage.keyDarkMode);
+      username = prefs.getString(SettingsPage.keyUsername);
+    });
+    _usernameController.text = username ?? '';
   }
 
   Future<void> saveSettings() async {
-    // final prefs = await SharedPreferences.getInstance();
-    // await prefs.setInt(SettingsPage.keyDarkMode, darkMode ?? 1);
-    // await prefs.setString(SettingsPage.keyUsername, username ?? '');
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(SettingsPage.keyDarkMode, darkMode ?? 1);
+    await prefs.setString(SettingsPage.keyUsername, username ?? '');
   }
 }

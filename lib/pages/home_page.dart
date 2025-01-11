@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:codestats_client/pages/settings_page.dart';
 import 'package:codestats_client/router/router.dart';
 import 'package:codestats_client/widgets/day_stats.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ import 'package:codestats_client/widgets/main_stats_card.dart';
 import 'package:codestats_client/widgets/language_stats_card.dart';
 import 'package:codestats_client/providers/stats_provider.dart';
 import 'package:codestats_client/responsive/responsive_layout.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   final _statsService = StatsService();
 
   _fetchStats() async {
-    String user = "harshnj";
+    String user = (await SharedPreferences.getInstance()).getString(SettingsPage.keyUsername) ?? 'harshnj';
     try {
       final stats = await _statsService.getStats(user);
 

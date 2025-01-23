@@ -70,7 +70,6 @@ class _HomePageState extends State<HomePage> {
       ]),
       body: SafeArea(
         child: RefreshIndicator.adaptive(
-          color: Colors.blueGrey,
           onRefresh: () async {
             await _fetchStats();
             if (!context.mounted) return;
@@ -104,7 +103,7 @@ class _HomePageState extends State<HomePage> {
 
                   Text(
                     "Languages you speak!",
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.headlineMedium,
                   ),
 
                   ResponsiveLayout(
@@ -138,16 +137,16 @@ class _HomePageState extends State<HomePage> {
 
                   Text(
                     "Your Year in a Glance",
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.headlineMedium,
                   ),
 
                   HeatMap(
-                    datasets: stats.dateXp.dates,
+                    datasets: stats.dateXp.getHeatmapDates(DateTime.now().year),
                     colorMode: ColorMode.opacity,
-                    // startDate: stats.dateXp.getLastProgrammed().subtract(Duration(days: 365)),
-                    // endDate: DateTime.now(),
+                    // startDate: DateTime(DateTime.now().year, 1, 1),
+                    endDate: DateTime(DateTime.now().year, 12, 31),
                     colorsets: {
-                      0: Colors.lightBlueAccent.shade400,
+                      0: Colors.lightBlueAccent.shade700,
                     },
                     defaultColor: Colors.grey.shade300,
                     size: 16,

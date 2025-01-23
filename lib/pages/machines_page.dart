@@ -65,7 +65,6 @@ class _MachinesPageState extends State<MachinesPage> {
       ]),
       body: SafeArea(
         child: RefreshIndicator.adaptive(
-          color: Colors.blueGrey,
           onRefresh: () async {
             await _fetchStats();
             if (!context.mounted) return;

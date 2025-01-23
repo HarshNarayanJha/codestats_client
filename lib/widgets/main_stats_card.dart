@@ -55,7 +55,7 @@ class MainStatsCard extends StatelessWidget {
                     barRadius: Radius.circular(8),
                     lineHeight: 20.0,
                     animation: true,
-                    center: Text(stats.getLevelProgressF(), style: Theme.of(context).primaryTextTheme.labelLarge?.copyWith(fontWeight: FontWeight.w700)),
+                    center: Text(stats.getLevelProgressF(), style: Theme.of(context).primaryTextTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold)),
                   ),
                 ],
               ),
@@ -67,10 +67,10 @@ class MainStatsCard extends StatelessWidget {
                 children: [
                   Text(
                     '${stats.getXpToNextLevel() - (stats.totalXp - xpToNextLevel(stats.getLevel() - 1))} XP to next level',
-                    style: Theme.of(context).primaryTextTheme.bodySmall?.copyWith(fontWeight: FontWeight.w400)
+                    style: Theme.of(context).primaryTextTheme.bodySmall
                   ),
-                  Text("User Since: ${stats.getUserSinceF()}", style: TextStyle(color: Colors.grey.shade400)),
-                  Text("Last programmed on: ${stats.getLastProgrammedF()}", style: TextStyle(color: Colors.grey.shade400)),
+                  Text("User Since: ${stats.getUserSinceF()}", style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.grey.shade400)),
+                  Text("Last programmed on: ${stats.getLastProgrammedF()}", style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.grey.shade400)),
                 ],
               ),
             ],

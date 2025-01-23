@@ -49,8 +49,15 @@ class DateXp {
   /// Creates a new DateXp instance.
   DateXp({required this.dates});
 
-  Map<DateTime, int> getYearDates(int year) {
-    return Map<DateTime, int>.fromEntries(dates.entries.where((element) => element.key.year == year));
+  Map<DateTime, int> getHeatmapDates(int year) {
+    Map<DateTime, int> result = {};
+
+    dates.forEach((date, value) {
+      var normalizedDate = DateTime(year, date.month, date.day);
+      result[normalizedDate] = (result[normalizedDate] ?? 0) + value;
+    });
+
+    return result;
   }
 
   /// Returns the first date xp was sent

@@ -1,5 +1,6 @@
 import 'package:codestats_client/providers/settings_provider.dart';
 import 'package:codestats_client/providers/stats_provider.dart';
+import 'package:codestats_client/responsive/responsive_layout.dart';
 import 'package:codestats_client/router/router.dart';
 import 'package:codestats_client/widgets/code_stats_app_bar.dart';
 import 'package:codestats_client/widgets/language_stats_card.dart';
@@ -65,7 +66,6 @@ class _LanguagesPageState extends State<LanguagesPage> {
       ]),
       body: SafeArea(
         child: RefreshIndicator.adaptive(
-          color: Colors.blueGrey,
           onRefresh: () async {
             await _fetchStats();
             if (!context.mounted) return;
@@ -87,15 +87,34 @@ class _LanguagesPageState extends State<LanguagesPage> {
                 spacing: 16.0,
                 children: [
                   Text("My Languages", style: Theme.of(context).textTheme.displaySmall?.copyWith(fontWeight: FontWeight.bold)),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: stats.languageXp.languages.length,
-                    itemBuilder: (context, index) {
-                      return LanguageStatsCard(
-                        stats: stats.languageXp.getLanguageByIndex(index),
-                      );
-                    },
+
+                  ResponsiveLayout(
+                    desktopBody: GridView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: MediaQuery.of(context).size.width ~/ 300,
+                        childAspectRatio: 2,
+                        crossAxisSpacing: 5,
+                        mainAxisSpacing: 5,
+                      ),
+                      itemCount: stats.languageXp.languages.length,
+                      itemBuilder: (context, index) {
+                        return LanguageStatsCard(
+                          stats: stats.languageXp.getLanguageByIndex(index),
+                        );
+                      },
+                    ),
+                    mobileBody: ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: stats.languageXp.languages.length,
+                      itemBuilder: (context, index) {
+                        return LanguageStatsCard(
+                          stats: stats.languageXp.getLanguageByIndex(index),
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),

@@ -74,12 +74,12 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ),
           ),
-          ListTile(
-            leading: const Icon(Icons.security),
-            title: const Text('Privacy & Security'),
-            trailing: const Icon(Icons.chevron_right),
-            onTap: () {},
-          ),
+          // ListTile(
+          //   leading: const Icon(Icons.security),
+          //   title: const Text('Privacy & Security'),
+          //   trailing: const Icon(Icons.chevron_right),
+          //   onTap: () {},
+          // ),
           AboutListTile(
             icon: const Icon(Icons.info),
             applicationVersion: "v0.0.1",

@@ -43,11 +43,11 @@ class LanguageStatsCard extends StatelessWidget {
                       ),
                       Text(
                         '${stats.getTotalXpF()} XP (+ ${stats.getNewXpF()} XP)',
-                        style: Theme.of(context).primaryTextTheme.bodySmall?.copyWith(fontWeight: FontWeight.w400)
+                        style: Theme.of(context).primaryTextTheme.bodySmall
                       ),
                       Text(
                         '${stats.getXpToNextLevel() - (stats.xps - xpToNextLevel(stats.getLevel() - 1))} XP to next level',
-                        style: Theme.of(context).primaryTextTheme.bodySmall?.copyWith(fontWeight: FontWeight.w400)
+                        style: Theme.of(context).primaryTextTheme.bodySmall
                       ),
                     ],
                   ),
@@ -75,7 +75,7 @@ class LanguageStatsCard extends StatelessWidget {
                         radius: 48,
                         lineWidth: 16.0,
                         animation: true,
-                        center: Text(stats.getLevelProgressF(), style: Theme.of(context).primaryTextTheme.labelLarge?.copyWith(fontWeight: FontWeight.w900)),
+                        center: Text(stats.getLevelProgressF(), style: Theme.of(context).primaryTextTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold)),
                       ),
                     ],
                   ),

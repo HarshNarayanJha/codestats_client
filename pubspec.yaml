@@ -42,6 +42,7 @@ dependencies:
   intl: ^0.20.1
   flutter_heatmap_calendar: ^1.0.5
   shared_preferences: ^2.3.5
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:

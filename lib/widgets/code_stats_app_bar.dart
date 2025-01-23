@@ -8,12 +8,7 @@ class CodeStatsAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(
-        "Code::Stats",
-        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-          fontWeight: FontWeight.bold
-        )
-      ),
+      title: Text("Code::Stats"),
       primary: true,
       actions: actions
     );

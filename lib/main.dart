@@ -1,3 +1,4 @@
+import 'package:codestats_client/providers/settings_provider.dart';
 import 'package:codestats_client/providers/stats_provider.dart';
 import 'package:codestats_client/router/router.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +15,17 @@ void main() async {
   }
 
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => StatsProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => StatsProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SettingsProvider(),
+        ),
+      ],
       child: const CodeStatsApp(),
-    )
+    ),
   );
 }
 

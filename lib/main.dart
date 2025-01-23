@@ -1,4 +1,3 @@
-import 'package:codestats_client/models/user_settings.dart';
 import 'package:codestats_client/providers/settings_provider.dart';
 import 'package:codestats_client/providers/stats_provider.dart';
 import 'package:codestats_client/router/router.dart';
@@ -40,6 +39,8 @@ class CodeStatsApp extends StatelessWidget {
 
     if (settings.settings?.darkMode == 0) {
       themeMode = ThemeMode.light;
+    } else if (settings.settings?.darkMode == 1) {
+      themeMode = ThemeMode.system;
     } else if (settings.settings?.darkMode == 2) {
       themeMode = ThemeMode.dark;
     }
@@ -53,7 +54,6 @@ class CodeStatsApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch(brightness: Brightness.light, primarySwatch: Colors.blueGrey),
         useMaterial3: true,
       ),
-      // TODO: Work on dark mode
       darkTheme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(brightness: Brightness.dark, primarySwatch: Colors.blueGrey),
         useMaterial3: true,

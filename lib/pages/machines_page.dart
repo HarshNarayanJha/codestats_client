@@ -1,6 +1,7 @@
 import 'package:codestats_client/providers/settings_provider.dart';
 import 'package:codestats_client/providers/stats_provider.dart';
 import 'package:codestats_client/router/router.dart';
+import 'package:codestats_client/widgets/code_stats_app_bar.dart';
 import 'package:codestats_client/widgets/machines_stats_card.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -39,34 +40,29 @@ class _MachinesPageState extends State<MachinesPage> {
     final stats = context.watch<StatsProvider>().stats;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Code::Stats", style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight:FontWeight.bold)),
-        primary: true,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.sync_rounded),
-            tooltip: "Sync",
-            onPressed: () async {
-              await _fetchStats();
-              if (!context.mounted) return;
+      appBar: CodeStatsAppBar(actions: [
+        IconButton(
+          icon: const Icon(Icons.sync_rounded),
+          tooltip: "Sync",
+          onPressed: () async {
+            await _fetchStats();
+            if (!context.mounted) return;
 
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text("Fetched Latest Stats!"),
-                  showCloseIcon: true,
-                  behavior: SnackBarBehavior.floating,
-                )
-              );
-
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.settings_rounded),
-            tooltip: "Settings",
-            onPressed: () => context.push(Routes.settingsPage),
-          )
-        ]
-      ),
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text("Fetched Latest Stats!"),
+                showCloseIcon: true,
+                behavior: SnackBarBehavior.floating,
+              )
+            );
+          },
+        ),
+        IconButton(
+          icon: const Icon(Icons.settings_rounded),
+          tooltip: "Settings",
+          onPressed: () => context.push(Routes.settingsPage),
+        )
+      ]),
       body: SafeArea(
         child: RefreshIndicator.adaptive(
           color: Colors.blueGrey,
@@ -83,7 +79,7 @@ class _MachinesPageState extends State<MachinesPage> {
             );
 
           },
-          child: stats == null ? CircularProgressIndicator() : SingleChildScrollView(
+          child: stats == null ? Center(child: CircularProgressIndicator()) : SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 16.0, bottom: 8.0),
               child: Column(

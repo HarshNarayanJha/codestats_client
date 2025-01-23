@@ -1,6 +1,4 @@
-import 'dart:developer';
-
-import 'package:codestats_client/pages/settings_page.dart';
+import 'package:codestats_client/providers/settings_provider.dart';
 import 'package:codestats_client/router/router.dart';
 import 'package:codestats_client/widgets/day_stats.dart';
 import 'package:flutter/material.dart';
@@ -8,13 +6,10 @@ import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:codestats_client/services/stats_service.dart';
-import 'package:codestats_client/models/user_stats.dart';
 import 'package:codestats_client/widgets/main_stats_card.dart';
 import 'package:codestats_client/widgets/language_stats_card.dart';
 import 'package:codestats_client/providers/stats_provider.dart';
 import 'package:codestats_client/responsive/responsive_layout.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -25,20 +20,16 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  final _statsService = StatsService();
-
   _fetchStats() async {
-    String user = (await SharedPreferences.getInstance()).getString(SettingsPage.keyUsername) ?? 'harshnj';
-    try {
-      final stats = await _statsService.getStats(user);
-
-      if (!mounted) {
+    if (context.mounted) {
+      final statsProvider = Provider.of<StatsProvider>(context, listen: false);
+      if (statsProvider.stats != null) {
         return;
       }
-      context.read<StatsProvider>().setStats(stats);
 
-    } catch(e) {
-      log(e.toString());
+      final settingsProvider = Provider.of<SettingsProvider>(context, listen: false);
+      var settings = await settingsProvider.loadSettings();
+      await statsProvider.fetchStats(settings);
     }
   }
 
@@ -50,7 +41,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final stats = context.watch<StatsProvider>().stats ?? UserStats.empty();
+    final stats = context.watch<StatsProvider>().stats;
 
     return Scaffold(
       appBar: AppBar(
@@ -71,7 +62,6 @@ class _HomePageState extends State<HomePage> {
                   behavior: SnackBarBehavior.floating,
                 )
               );
-
             },
           ),
           IconButton(
@@ -95,36 +85,30 @@ class _HomePageState extends State<HomePage> {
                 behavior: SnackBarBehavior.floating,
               )
             );
-
           },
-          child: SingleChildScrollView(
+          child: stats == null ? CircularProgressIndicator() : SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 16.0, bottom: 8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 15.0,
                 children: <Widget>[
                   Text(
                     "Welcome ${stats.user}!",
                     style: Theme.of(context).textTheme.displaySmall?.copyWith(fontWeight: FontWeight.bold),
                   ),
 
-                  SizedBox(height: 30),
                   MainStatsCard(
                     stats: stats
                   ),
-                  SizedBox(height: 30),
 
                   DayStats(stats: stats),
-
-                  SizedBox(height: 30),
                   Divider(thickness: 0.5),
-                  SizedBox(height: 30),
 
                   Text(
                     "Languages you speak!",
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 10),
 
                   ResponsiveLayout(
                     desktopBody: GridView.builder(
@@ -155,13 +139,10 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
 
-                  SizedBox(height: 30),
-
                   Text(
                     "Your Year in a Glance",
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 10),
 
                   HeatMap(
                     datasets: stats.dateXp.dates,

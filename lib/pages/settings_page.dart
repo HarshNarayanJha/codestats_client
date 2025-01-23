@@ -1,10 +1,14 @@
+import 'package:codestats_client/models/user_settings.dart';
+import 'package:codestats_client/providers/settings_provider.dart';
+import 'package:codestats_client/providers/stats_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
   static const keyDarkMode = "dark_mode";
-
   static const keyUsername = "username";
+
   const SettingsPage({super.key});
 
   @override
@@ -97,6 +101,7 @@ class _SettingsPageState extends State<SettingsPage> {
       darkMode = prefs.getInt(SettingsPage.keyDarkMode);
       username = prefs.getString(SettingsPage.keyUsername);
     });
+
     _usernameController.text = username ?? '';
   }
 
@@ -104,5 +109,10 @@ class _SettingsPageState extends State<SettingsPage> {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(SettingsPage.keyDarkMode, darkMode ?? 1);
     await prefs.setString(SettingsPage.keyUsername, username ?? '');
+
+    if (mounted && darkMode != null && username != null) {
+      context.read<SettingsProvider>().setSettings(UserSettings(darkMode: darkMode!, username: username!));
+      context.read<StatsProvider>().fetchStats(context.read<SettingsProvider>().settings);
+    }
   }
 }

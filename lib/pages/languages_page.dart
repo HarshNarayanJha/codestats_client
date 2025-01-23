@@ -1,9 +1,6 @@
-import 'dart:developer';
-
-import 'package:codestats_client/models/user_stats.dart';
+import 'package:codestats_client/providers/settings_provider.dart';
 import 'package:codestats_client/providers/stats_provider.dart';
 import 'package:codestats_client/router/router.dart';
-import 'package:codestats_client/services/stats_service.dart';
 import 'package:codestats_client/widgets/language_stats_card.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,20 +14,17 @@ class LanguagesPage extends StatefulWidget {
 }
 
 class _LanguagesPageState extends State<LanguagesPage> {
-  final _statsService = StatsService();
 
   _fetchStats() async {
-    String user = "harshnj";
-    try {
-      final stats = await _statsService.getStats(user);
-
-      if (!mounted) {
+    if (context.mounted) {
+      final statsProvider = Provider.of<StatsProvider>(context, listen: false);
+      if (statsProvider.stats != null) {
         return;
       }
-      context.read<StatsProvider>().setStats(stats);
 
-    } catch(e) {
-      log(e.toString());
+      final settingsProvider = Provider.of<SettingsProvider>(context, listen: false);
+      var settings = await settingsProvider.loadSettings();
+      await statsProvider.fetchStats(settings);
     }
   }
 
@@ -42,7 +36,7 @@ class _LanguagesPageState extends State<LanguagesPage> {
 
   @override
   Widget build(BuildContext context) {
-    final stats = context.watch<StatsProvider>().stats ?? UserStats.empty();
+    final stats = context.watch<StatsProvider>().stats;
 
     return Scaffold(
       appBar: AppBar(
@@ -89,7 +83,7 @@ class _LanguagesPageState extends State<LanguagesPage> {
             );
 
           },
-          child: SingleChildScrollView(
+          child: stats == null ? CircularProgressIndicator() : SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 16.0, bottom: 8.0),
               child: Column(

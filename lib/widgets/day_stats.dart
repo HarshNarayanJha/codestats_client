@@ -15,9 +15,8 @@ class DayStats extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 8.0,
         children: [
-          Text("Day highlights", style: Theme.of(context).textTheme.titleLarge),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(

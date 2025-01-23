@@ -12,7 +12,6 @@ class MainStatsCard extends StatelessWidget {
     return Card(
       color: Colors.brown.shade400,
       elevation: 6.0,
-      // shadowColor: Colors.blueGrey,
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
         onTap: () {},
@@ -56,7 +55,7 @@ class MainStatsCard extends StatelessWidget {
                     barRadius: Radius.circular(8),
                     lineHeight: 20.0,
                     animation: true,
-                    center: Text(stats.getLevelProgressF(), style: Theme.of(context).primaryTextTheme.labelLarge?.copyWith(fontWeight: FontWeight.w500)),
+                    center: Text(stats.getLevelProgressF(), style: Theme.of(context).primaryTextTheme.labelLarge?.copyWith(fontWeight: FontWeight.w700)),
                   ),
                 ],
               ),
@@ -64,6 +63,7 @@ class MainStatsCard extends StatelessWidget {
               SizedBox(height: 5.0),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 2.0,
                 children: [
                   Text(
                     '${stats.getXpToNextLevel() - (stats.totalXp - xpToNextLevel(stats.getLevel() - 1))} XP to next level',

@@ -43,7 +43,6 @@ final router = GoRouter(
                   child: const HomePage(),
                 );
               },
-              // builder: (context, state) => const HomePage(),
             ),
           ],
         ),

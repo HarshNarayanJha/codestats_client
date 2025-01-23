@@ -112,7 +112,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
     if (mounted && darkMode != null && username != null) {
       context.read<SettingsProvider>().setSettings(UserSettings(darkMode: darkMode!, username: username!));
-      context.read<StatsProvider>().fetchStats(context.read<SettingsProvider>().settings);
+      context.read<StatsProvider>().fetchStats(context.read<SettingsProvider>().settings!);
     }
   }
 }

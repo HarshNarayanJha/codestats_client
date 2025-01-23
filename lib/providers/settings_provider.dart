@@ -5,16 +5,20 @@ import 'package:flutter/material.dart';
 class SettingsProvider extends ChangeNotifier {
 
   /// Current user settings
-  late UserSettings _settings;
+  UserSettings? _settings;
+
+  SettingsProvider() {
+    loadSettings();
+  }
 
   Future<UserSettings> loadSettings() async {
     _settings = await UserSettings.load();
     notifyListeners();
-    return settings;
+    return settings!;
   }
 
   /// Gets the current user settings
-  UserSettings get settings => _settings;
+  UserSettings? get settings => _settings;
 
   /// Updates the user settings and notifies listeners
   void setSettings(UserSettings newSettings) {

@@ -1,3 +1,4 @@
+import 'package:codestats_client/models/user_settings.dart';
 import 'package:codestats_client/providers/settings_provider.dart';
 import 'package:codestats_client/providers/stats_provider.dart';
 import 'package:codestats_client/router/router.dart';
@@ -34,10 +35,20 @@ class CodeStatsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final settings = context.watch<SettingsProvider>();
+    var themeMode = ThemeMode.system;
+
+    if (settings.settings?.darkMode == 0) {
+      themeMode = ThemeMode.light;
+    } else if (settings.settings?.darkMode == 2) {
+      themeMode = ThemeMode.dark;
+    }
+
     return MaterialApp.router(
       title: 'Code::Stats',
       themeAnimationDuration: Duration(milliseconds: 50),
       themeAnimationCurve: Curves.decelerate,
+      themeMode: themeMode,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(brightness: Brightness.light, primarySwatch: Colors.blueGrey),
         useMaterial3: true,

@@ -4,6 +4,7 @@ import 'package:codestats_client/providers/stats_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatefulWidget {
   static const keyDarkMode = "dark_mode";
@@ -74,15 +75,30 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ),
           ),
-          // ListTile(
-          //   leading: const Icon(Icons.security),
-          //   title: const Text('Privacy & Security'),
-          //   trailing: const Icon(Icons.chevron_right),
-          //   onTap: () {},
-          // ),
+          ListTile(
+            leading: const Icon(Icons.code),
+            title: const Text('Code::Stats'),
+            subtitle: const Text('Visit Code::Stats website'),
+            onTap: () => launchUrl(Uri.parse('https://codestats.net')),
+          ),
+          ListTile(
+            leading: const Icon(Icons.book),
+            title: const Text('GitHub Repository'),
+            subtitle: const Text('View source code'),
+            onTap: () => launchUrl(Uri.parse('https://github.com/HarshNarayanJha/codestats_client')),
+          ),
           AboutListTile(
             icon: const Icon(Icons.info),
-            applicationVersion: "v0.0.1",
+            applicationVersion: "1.0.0-beta1",
+            applicationName: "Code::Stats Client",
+            applicationIcon: const Icon(Icons.bar_chart),
+            applicationLegalese: "© 2025 Harsh Narayan Jha",
+            aboutBoxChildren: [
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 8.0),
+                child: Text('A mobile client for Code::Stats written in Flutter'),
+              ),
+            ],
           ),
         ],
       ),

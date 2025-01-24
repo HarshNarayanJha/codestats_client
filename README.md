@@ -1,14 +1,35 @@
-# codestats_client
+# CodeStats Client 📊
 
-An client app to view your Code::Stats data (WIP)
+A sleek mobile client for viewing your Code::Stats analytics and tracking your coding journey. Currently displays your programming languages, experience levels, XP, and development machines.
 
-Original Service @[codestats.net](https://codestats.net/)
+## 🚀 Upcoming Features
 
-## Screenshots (WIP)
+- [ ] Home Screen Widgets
+- [ ] Top Languages Dashboard
+- [ ] Language Progress Tracking
+- [ ] Activity Heatmap
+- [ ] Machine Statistics
+- [ ] Daily XP Tracking
+- [ ] Streak Notifications
+- [ ] Shareable Achievement Badges
 
-| Screenshot | Description |
-|------------|-------------|
-| <img src="images/home.png" width="200px" alt="Home Page"/> | Home Page |
-| <img src="images/heatmap.png" width="200px" alt="Heatmap"/> | Heatmap |
-| <img src="images/langs.png" width="200px" alt="Languages"/> | Languages |
-| <img src="images/machines.png" width="200px" alt="Machines"/> | Machines |
+## ⚡️ Quick Links
+
+[Visit Code::Stats](https://codestats.net/) - The original service that powers this client.
+
+> This is a community-built client app created with ❤️ for developers who want to track their coding progress. Not officially affiliated with Code::Stats.
+
+## 📱 Screenshots
+
+<div align="center">
+  <p float="left">
+    <img src="images/Samsung Galaxy S21 Ultra Screenshot 1.png" width="200px" alt="Home Page"/>
+    <img src="images/Samsung Galaxy S21 Ultra Screenshot 2.png" width="200px" alt="Languages"/>
+    <img src="images/machines_light.png" width="200px" alt="Machines"/>
+    <img src="images/Google Pixel 4 XL Screenshot 2.png" width="200px" alt="Settings"/>
+    <img src="images/Google Pixel 4 XL Screenshot 1.png" width="200px" alt="Home Dark"/>
+  </p>
+  <p>
+    <em>Left to right: Home Page, Languages, Machines, Settings, Home Page (Dark Mode)</em>
+  </p>
+</div>

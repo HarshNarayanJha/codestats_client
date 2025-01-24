@@ -19,6 +19,12 @@ A sleek mobile client for viewing your Code::Stats analytics and tracking your c
 
 > This is a community-built client app created with ❤️ for developers who want to track their coding progress. Not officially affiliated with Code::Stats.
 
+## Get the App
+
+Download the latest version from our releases section. The app is currently in beta phase.
+
+Important: After installation, please navigate to the app settings (top-right corner) to set your username. This is required for the app to load properly - without it, the home screen loading indicator will continue spinning indefinitely.
+
 ## 📱 Screenshots
 
 <div align="center">

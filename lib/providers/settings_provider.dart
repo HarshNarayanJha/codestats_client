@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 /// Provides user settings and notifies listeners of changes
 class SettingsProvider extends ChangeNotifier {
-
   /// Current user settings
   UserSettings? _settings;
 

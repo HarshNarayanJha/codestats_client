@@ -7,11 +7,7 @@ class CodeStatsAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      title: Text("Code::Stats"),
-      primary: true,
-      actions: actions
-    );
+    return AppBar(title: Text("Code::Stats"), primary: true, actions: actions);
   }
 
   @override

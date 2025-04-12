@@ -51,13 +51,12 @@ class CodeStatsApp extends StatelessWidget {
     MaterialTheme theme = MaterialTheme(textTheme);
 
     return MaterialApp.router(
-      title: 'Code::Stats',
-      themeAnimationDuration: Duration(milliseconds: 50),
-      themeAnimationCurve: Curves.decelerate,
-      themeMode: themeMode,
-      theme: theme.light(),
-      darkTheme: theme.dark(),
-      routerConfig: router
-    );
+        title: 'Code::Stats',
+        themeAnimationDuration: Duration(milliseconds: 50),
+        themeAnimationCurve: Curves.decelerate,
+        themeMode: themeMode,
+        theme: theme.light(),
+        darkTheme: theme.dark(),
+        routerConfig: router);
   }
 }

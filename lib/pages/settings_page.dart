@@ -17,7 +17,6 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-
   int? darkMode;
   String? username;
 
@@ -37,17 +36,20 @@ class _SettingsPageState extends State<SettingsPage> {
             trailing: SegmentedButton<int>(
               segments: [
                 ButtonSegment(
-                  value: 0,
-                  icon: Icon(Icons.light_mode)//, color: Theme.of(context).primaryIconTheme.color),
-                ),
+                    value: 0,
+                    icon: Icon(Icons
+                        .light_mode) //, color: Theme.of(context).primaryIconTheme.color),
+                    ),
                 ButtonSegment(
-                  value: 1,
-                  icon: Icon(Icons.smartphone)//, color: Theme.of(context).primaryIconTheme.color),
-                ),
+                    value: 1,
+                    icon: Icon(Icons
+                        .smartphone) //, color: Theme.of(context).primaryIconTheme.color),
+                    ),
                 ButtonSegment(
-                  value: 2,
-                  icon: Icon(Icons.dark_mode)//, color: Theme.of(context).primaryIconTheme.color),
-                ),
+                    value: 2,
+                    icon: Icon(Icons
+                        .dark_mode) //, color: Theme.of(context).primaryIconTheme.color),
+                    ),
               ],
               showSelectedIcon: false,
               selected: {darkMode ?? 1},
@@ -66,13 +68,12 @@ class _SettingsPageState extends State<SettingsPage> {
             trailing: SizedBox(
               width: 125,
               child: TextField(
-                autocorrect: false,
-                controller: _usernameController,
-                onSubmitted: (value) {
-                  username = value;
-                  saveSettings();
-                }
-              ),
+                  autocorrect: false,
+                  controller: _usernameController,
+                  onSubmitted: (value) {
+                    username = value;
+                    saveSettings();
+                  }),
             ),
           ),
           ListTile(
@@ -85,7 +86,8 @@ class _SettingsPageState extends State<SettingsPage> {
             leading: const Icon(Icons.book),
             title: const Text('GitHub Repository'),
             subtitle: const Text('View source code'),
-            onTap: () => launchUrl(Uri.parse('https://github.com/HarshNarayanJha/codestats_client')),
+            onTap: () => launchUrl(Uri.parse(
+                'https://github.com/HarshNarayanJha/codestats_client')),
           ),
           AboutListTile(
             icon: const Icon(Icons.info),
@@ -96,7 +98,8 @@ class _SettingsPageState extends State<SettingsPage> {
             aboutBoxChildren: [
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: Text('A mobile client for Code::Stats written in Flutter'),
+                child:
+                    Text('A mobile client for Code::Stats written in Flutter'),
               ),
             ],
           ),
@@ -127,8 +130,12 @@ class _SettingsPageState extends State<SettingsPage> {
     await prefs.setString(SettingsPage.keyUsername, username ?? '');
 
     if (mounted && darkMode != null && username != null) {
-      context.read<SettingsProvider>().setSettings(UserSettings(darkMode: darkMode!, username: username!));
-      context.read<StatsProvider>().fetchStats(context.read<SettingsProvider>().settings!);
+      context
+          .read<SettingsProvider>()
+          .setSettings(UserSettings(darkMode: darkMode!, username: username!));
+      context
+          .read<StatsProvider>()
+          .fetchStats(context.read<SettingsProvider>().settings!);
     }
   }
 }

@@ -24,7 +24,6 @@ int xpToNextLevel(int currLevel) {
 
 /// Gets progress percentage to next level (0-100)
 double levelProgress(int xp) {
-
   if (xp <= 0) {
     return 0;
   }
@@ -115,9 +114,7 @@ class LanguageXp {
   LanguageXp({required this.languages});
 
   Map<String, LanguageDetails> getTopLanguages({int top = 5}) {
-    var sortedLanguages = Map.fromEntries(
-      languages.entries.toList().take(top)
-    );
+    var sortedLanguages = Map.fromEntries(languages.entries.toList().take(top));
     return sortedLanguages;
   }
 
@@ -129,15 +126,14 @@ class LanguageXp {
   }
 
   LanguageXp sortLanguagesByXp({bool decreasing = true}) {
-    var languagesMap = Map.fromEntries(
-      languages.entries.toList()..sort((a, b) {
+    var languagesMap = Map.fromEntries(languages.entries.toList()
+      ..sort((a, b) {
         if (decreasing) {
           return b.value.xps.compareTo(a.value.xps);
         } else {
           return a.value.xps.compareTo(b.value.xps);
         }
-      })
-    );
+      }));
 
     return LanguageXp(languages: languagesMap);
   }
@@ -165,16 +161,18 @@ class LanguageXp {
 
 /// Class representing the experience points details for a specific programming language.
 class LanguageDetails {
-
   /// The language name
   final String name;
+
   /// The amount of new XP earned in the past 12 hours.
   final int newXps;
+
   /// The total accumulated XP for this language.
   final int xps;
 
   /// Creates a new LanguageDetails instance.
-  LanguageDetails({required this.name, required this.newXps, required this.xps});
+  LanguageDetails(
+      {required this.name, required this.newXps, required this.xps});
 
   /// Creates a LanguageDetails instance from JSON data.
   factory LanguageDetails.fromJson(Map<String, dynamic> json, String key) {
@@ -231,9 +229,7 @@ class MachineXp {
   MachineXp({required this.machines});
 
   Map<String, MachineDetails> getTopMachines({int top = 5}) {
-  var sortedMachines = Map.fromEntries(
-      machines.entries.toList().take(top)
-    );
+    var sortedMachines = Map.fromEntries(machines.entries.toList().take(top));
     return sortedMachines;
   }
 
@@ -245,15 +241,14 @@ class MachineXp {
   }
 
   MachineXp sortMachinesByXp({bool decreasing = true}) {
-    var languagesMap = Map.fromEntries(
-      machines.entries.toList()..sort((a, b) {
+    var languagesMap = Map.fromEntries(machines.entries.toList()
+      ..sort((a, b) {
         if (decreasing) {
           return b.value.xps.compareTo(a.value.xps);
         } else {
           return a.value.xps.compareTo(b.value.xps);
         }
-      })
-    );
+      }));
 
     return MachineXp(machines: languagesMap);
   }
@@ -341,7 +336,6 @@ class MachineDetails {
 
 /// A class representing user statistics and experience points (XP).
 class UserStats {
-
   /// The user identifier.
   final String user;
 

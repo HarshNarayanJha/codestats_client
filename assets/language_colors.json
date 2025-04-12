@@ -1,0 +1,386 @@
+{
+  "AsciiDoc": {
+    "dark_mode": "#555555",
+    "light_mode": "#8a8a8a"
+  },
+  "Assembly": {
+    "dark_mode": "#8E6C23",
+    "light_mode": "#8C4B0A"
+  },
+  "Assembly (x86)": {
+    "dark_mode": "#8E6C23",
+    "light_mode": "#8A4B08"
+  },
+  "Batch File": {
+    "dark_mode": "#C1F12E",
+    "light_mode": "#934B00"
+  },
+  "Blade": {
+    "dark_mode": "#F72C1F",
+    "light_mode": "#F05A28"
+  },
+  "C": {
+    "dark_mode": "#444444",
+    "light_mode": "#283593"
+  },
+  "C++": {
+    "dark_mode": "#0078D4",
+    "light_mode": "#0078D4"
+  },
+  "C#": {
+    "dark_mode": "#8A419A",
+    "light_mode": "#178600"
+  },
+  "cabal": {
+    "dark_mode": "#684685",
+    "light_mode": "#5D3469"
+  },
+  "Clojure": {
+    "dark_mode": "#63B132",
+    "light_mode": "#5881D8"
+  },
+  "Common Lisp": {
+    "dark_mode": "#9F5E3F",
+    "light_mode": "#7F5AB6"
+  },
+  "Coq": {
+    "dark_mode": "#D0B068",
+    "light_mode": "#91B6C7"
+  },
+  "Crystal": {
+    "dark_mode": "#222222",
+    "light_mode": "#969696"
+  },
+  "CSharp": {
+    "dark_mode": "#8A419A",
+    "light_mode": "#178600"
+  },
+  "CSS": {
+    "dark_mode": "#4D73E4",
+    "light_mode": "#563d7c"
+  },
+  "CSV": {
+    "dark_mode": "#31A8FF",
+    "light_mode": "#237346"
+  },
+  "D": {
+    "dark_mode": "#B03931",
+    "light_mode": "#BA595E"
+  },
+  "Dart": {
+    "dark_mode": "#00B4AB",
+    "light_mode": "#0175C2"
+  },
+  "Diff": {
+    "dark_mode": "#40A040",
+    "light_mode": "#88C0D0"
+  },
+  "Dockerfile": {
+    "dark_mode": "#2496ED",
+    "light_mode": "#0DB7ED"
+  },
+  "Elixir": {
+    "dark_mode": "#8E6A9E",
+    "light_mode": "#4B275F"
+  },
+  "Elm": {
+    "dark_mode": "#60B5CC",
+    "light_mode": "#5FB4CB"
+  },
+  "Erlang": {
+    "dark_mode": "#A90533",
+    "light_mode": "#B83998"
+  },
+  "F#": {
+    "dark_mode": "#378BBA",
+    "light_mode": "#378BBA"
+  },
+  "Fish": {
+    "dark_mode": "#4AAE47",
+    "light_mode": "#41C1E1"
+  },
+  "FSharp": {
+    "dark_mode": "#378BBA",
+    "light_mode": "#378BBA"
+  },
+  "GDScript": {
+    "dark_mode": "#557590",
+    "light_mode": "#4AAEE8"
+  },
+  "Gleam": {
+    "dark_mode": "#FFAFF3",
+    "light_mode": "#FFAFF3"
+  },
+  "GLSL": {
+    "dark_mode": "#5586A4",
+    "light_mode": "#079699"
+  },
+  "Go": {
+    "dark_mode": "#00ADD8",
+    "light_mode": "#00A9A9"
+  },
+  "GraphQL": {
+    "dark_mode": "#E10098",
+    "light_mode": "#E535AB"
+  },
+  "Haskell": {
+    "dark_mode": "#7E70A6",
+    "light_mode": "#5D4F85"
+  },
+  "Haxe": {
+    "dark_mode": "#EA8220",
+    "light_mode": "#F68712"
+  },
+  "HEEX": {
+    "dark_mode": "#8E6A9E",
+    "light_mode": "#4B275F"
+  },
+  "HTML": {
+    "dark_mode": "#E34F26",
+    "light_mode": "#E34C26"
+  },
+  "Hy": {
+    "dark_mode": "#7790B2",
+    "light_mode": "#7FB800"
+  },
+  "Hyperledger Composer": {
+    "dark_mode": "#4C5E70",
+    "light_mode": "#3B4C5C"
+  },
+  "Hyperledger Composer ACL": {
+    "dark_mode": "#5D7AA0",
+    "light_mode": "#476A8E"
+  },
+  "Hyperledger Composer Query": {
+    "dark_mode": "#6A88AB",
+    "light_mode": "#596A7B"
+  },
+  "Idris": {
+    "dark_mode": "#8A0819",
+    "light_mode": "#BA0F25"
+  },
+  "Ini": {
+    "dark_mode": "#D1DFE2",
+    "light_mode": "#6A717C"
+  },
+  "Java": {
+    "dark_mode": "#0093B6",
+    "light_mode": "#083A66"
+  },
+  "JavaScript": {
+    "dark_mode": "#B8B211",
+    "light_mode": "#946800"
+  },
+  "JavaScript (Angular)": {
+    "dark_mode": "#DD0031",
+    "light_mode": "#C4002B"
+  },
+  "JavaScript (Dust)": {
+    "dark_mode": "#B79F66",
+    "light_mode": "#925F2C"
+  },
+  "JavaScript (Flow)": {
+    "dark_mode": "#FFD43B",
+    "light_mode": "#945200"
+  },
+  "JavaScript (JSX)": {
+    "dark_mode": "#359EBB",
+    "light_mode": "#0067A3"
+  },
+  "Jest Snapshot": {
+    "dark_mode": "#B9627B",
+    "light_mode": "#C21325"
+  },
+  "JSON": {
+    "dark_mode": "#494949",
+    "light_mode": "#178600"
+  },
+  "JSONC": {
+    "dark_mode": "#3C4853",
+    "light_mode": "#178600"
+  },
+  "JSP": {
+    "dark_mode": "#F9BB00",
+    "light_mode": "#336791"
+  },
+  "Julia": {
+    "dark_mode": "#9558B2",
+    "light_mode": "#389826"
+  },
+  "KDL": {
+    "dark_mode": "#8BC34A",
+    "light_mode": "#3DAEE9"
+  },
+  "Kotlin": {
+    "dark_mode": "#7F52FF",
+    "light_mode": "#FF4B4B"
+  },
+  "Lua": {
+    "dark_mode": "#4C4D92",
+    "light_mode": "#00AEEF"
+  },
+  "Markdown": {
+    "dark_mode": "#285FC1",
+    "light_mode": "#000000"
+  },
+  "MQL4": {
+    "dark_mode": "#88419A",
+    "light_mode": "#0078D7"
+  },
+  "Nickel": {
+    "dark_mode": "#AF7E35",
+    "light_mode": "#C59000"
+  },
+  "Nim": {
+    "dark_mode": "#FFE953",
+    "light_mode": "#FFC200"
+  },
+  "Nix": {
+    "dark_mode": "#5277C3",
+    "light_mode": "#7EBAE4"
+  },
+  "OCaml": {
+    "dark_mode": "#F29111",
+    "light_mode": "#EC6813"
+  },
+  "PHP": {
+    "dark_mode": "#777BB4",
+    "light_mode": "#4F5D95"
+  },
+  "PHP (Laravel Artisan)": {
+    "dark_mode": "#FF2D20",
+    "light_mode": "#F05340"
+  },
+  "Plain text": {
+    "dark_mode": "#FFFFFF",
+    "light_mode": "#000000"
+  },
+  "PowerShell": {
+    "dark_mode": "#214476",
+    "light_mode": "#5391FE"
+  },
+  "Pug": {
+    "dark_mode": "#A86454",
+    "light_mode": "#966051"
+  },
+  "PureScript": {
+    "dark_mode": "#3D424D",
+    "light_mode": "#14161A"
+  },
+  "Python": {
+    "dark_mode": "#3776AB",
+    "light_mode": "#E69700"
+  },
+  "Q#": {
+    "dark_mode": "#00B8BC",
+    "light_mode": "#68217A"
+  },
+  "Racket": {
+    "dark_mode": "#3E5BA9",
+    "light_mode": "#A03787"
+  },
+  "reStructuredText": {
+    "dark_mode": "#51A7F9",
+    "light_mode": "#141414"
+  },
+  "Roc": {
+    "dark_mode": "#5C83FC",
+    "light_mode": "#3C64E6"
+  },
+  "Ruby": {
+    "dark_mode": "#BB313E",
+    "light_mode": "#E0115F"
+  },
+  "Rust": {
+    "dark_mode": "#8A6B54",
+    "light_mode": "#B7410E"
+  },
+  "Scala": {
+    "dark_mode": "#DC3220",
+    "light_mode": "#5A1D4C"
+  },
+  "Scheme": {
+    "dark_mode": "#1E4AEC",
+    "light_mode": "#4242FD"
+  },
+  "SCSS": {
+    "dark_mode": "#CD6799",
+    "light_mode": "#C16AA8"
+  },
+  "Shell": {
+    "dark_mode": "#3E3E3E",
+    "light_mode": "#455A64"
+  },
+  "Shell Script": {
+    "dark_mode": "#3E3E3E",
+    "light_mode": "#455A64"
+  },
+  "Slim": {
+    "dark_mode": "#4B4B4B",
+    "light_mode": "#E7E7E7"
+  },
+  "SQL": {
+    "dark_mode": "#F29111",
+    "light_mode": "#4C2C92"
+  },
+  "SQL (MySQL)": {
+    "dark_mode": "#4479A1",
+    "light_mode": "#E48E00"
+  },
+  "SQL (PostgreSQL)": {
+    "dark_mode": "#336791",
+    "light_mode": "#0064A5"
+  },
+  "SQL (SQLite)": {
+    "dark_mode": "#246484",
+    "light_mode": "#0388C5"
+  },
+  "Swift": {
+    "dark_mode": "#F05138",
+    "light_mode": "#FF4F00"
+  },
+  "TOML": {
+    "dark_mode": "#BC6241",
+    "light_mode": "#7E452F"
+  },
+  "TSX": {
+    "dark_mode": "#3178C6",
+    "light_mode": "#007ACC"
+  },
+  "TypeScript": {
+    "dark_mode": "#3178C6",
+    "light_mode": "#007ACC"
+  },
+  "TypeScript (JSX)": {
+    "dark_mode": "#007ACC",
+    "light_mode": "#0288D1"
+  },
+  "Visual Basic .NET": {
+    "dark_mode": "#945DB7",
+    "light_mode": "#512BD4"
+  },
+  "Vue": {
+    "dark_mode": "#389E70",
+    "light_mode": "#2C8960"
+  },
+  "Vue.js": {
+    "dark_mode": "#41B883",
+    "light_mode": "#4FC08D"
+  },
+  "WIT": {
+    "dark_mode": "#7AA0C0",
+    "light_mode": "#2C3E50"
+  },
+  "XML": {
+    "dark_mode": "#2080CC",
+    "light_mode": "#FE6621"
+  },
+  "YAML": {
+    "dark_mode": "#CB171E",
+    "light_mode": "#E67E22"
+  },
+  "Zig": {
+    "dark_mode": "#F7A41D",
+    "light_mode": "#F7A41D"
+  }
+}

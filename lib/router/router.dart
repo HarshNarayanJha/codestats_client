@@ -8,8 +8,7 @@ import 'package:go_router/go_router.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 final _homeNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'home');
-final _languagesNavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'languages');
+final _languagesNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'languages');
 final _machinesNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'machines');
 
 class Routes {
@@ -21,64 +20,64 @@ class Routes {
   static const String settingsPage = "/settings";
 }
 
-final router = GoRouter(
-    navigatorKey: _rootNavigatorKey,
-    initialLocation: Routes.homePage,
-    debugLogDiagnostics: true,
-    routes: [
-      StatefulShellRoute.indexedStack(
-          builder: (context, state, navigationShell) =>
-              LayoutScaffold(navigationShell: navigationShell),
-          branches: [
-            StatefulShellBranch(
-              navigatorKey: _homeNavigatorKey,
-              routes: [
-                GoRoute(
-                  name: 'home',
-                  path: Routes.homePage,
-                  pageBuilder: (context, state) {
-                    return MaterialPage(
-                      key: state.pageKey,
-                      child: const HomePage(),
-                    );
-                  },
-                ),
-              ],
+final router =
+    GoRouter(navigatorKey: _rootNavigatorKey, initialLocation: Routes.homePage, debugLogDiagnostics: true, routes: [
+  StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) => LayoutScaffold(navigationShell: navigationShell),
+      branches: [
+        StatefulShellBranch(
+          navigatorKey: _homeNavigatorKey,
+          routes: [
+            GoRoute(
+              name: 'home',
+              path: Routes.homePage,
+              pageBuilder: (context, state) {
+                return MaterialPage(
+                  key: state.pageKey,
+                  child: const HomePage(),
+                  maintainState: true,
+                );
+              },
             ),
-            StatefulShellBranch(navigatorKey: _languagesNavigatorKey, routes: [
-              GoRoute(
-                name: 'languages',
-                path: Routes.languagesPage,
-                pageBuilder: (context, state) {
-                  return MaterialPage(
-                    key: state.pageKey,
-                    child: const LanguagesPage(),
-                  );
-                },
-              ),
-            ]),
-            StatefulShellBranch(navigatorKey: _machinesNavigatorKey, routes: [
-              GoRoute(
-                name: 'machines',
-                path: Routes.machinesPage,
-                pageBuilder: (context, state) {
-                  return MaterialPage(
-                    key: state.pageKey,
-                    child: const MachinesPage(),
-                  );
-                },
-              ),
-            ]),
-          ]),
-      GoRoute(
-        parentNavigatorKey: _rootNavigatorKey,
-        name: 'settings',
-        path: Routes.settingsPage,
-        pageBuilder: (context, state) {
-          return MaterialPage(
-            key: state.pageKey,
-            child: const SettingsPage(),
-          );
-        },
-      ),
-    ]);
+          ],
+        ),
+        StatefulShellBranch(navigatorKey: _languagesNavigatorKey, routes: [
+          GoRoute(
+            name: 'languages',
+            path: Routes.languagesPage,
+            pageBuilder: (context, state) {
+              return MaterialPage(
+                key: state.pageKey,
+                child: const LanguagesPage(),
+                maintainState: true,
+              );
+            },
+          ),
+        ]),
+        StatefulShellBranch(navigatorKey: _machinesNavigatorKey, routes: [
+          GoRoute(
+            name: 'machines',
+            path: Routes.machinesPage,
+            pageBuilder: (context, state) {
+              return MaterialPage(
+                key: state.pageKey,
+                child: const MachinesPage(),
+                maintainState: true,
+              );
+            },
+          ),
+        ]),
+      ]),
+  GoRoute(
+    parentNavigatorKey: _rootNavigatorKey,
+    name: 'settings',
+    path: Routes.settingsPage,
+    pageBuilder: (context, state) {
+      return MaterialPage(
+        key: state.pageKey,
+        child: const SettingsPage(),
+        maintainState: true,
+      );
+    },
+  ),
+]);

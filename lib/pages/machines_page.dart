@@ -15,15 +15,14 @@ class MachinesPage extends StatefulWidget {
 }
 
 class _MachinesPageState extends State<MachinesPage> {
-  _fetchStats() async {
+  Future<void> _fetchStats() async {
     if (context.mounted) {
       final statsProvider = Provider.of<StatsProvider>(context, listen: false);
       if (statsProvider.stats != null) {
         return;
       }
 
-      final settingsProvider =
-          Provider.of<SettingsProvider>(context, listen: false);
+      final settingsProvider = Provider.of<SettingsProvider>(context, listen: false);
       var settings = await settingsProvider.loadSettings();
       await statsProvider.fetchStats(settings);
     }
@@ -77,25 +76,21 @@ class _MachinesPageState extends State<MachinesPage> {
                     ? Center(child: CircularProgressIndicator())
                     : SingleChildScrollView(
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 8.0, right: 8.0, top: 16.0, bottom: 8.0),
+                          padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 16.0, bottom: 8.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             spacing: 16.0,
                             children: [
                               Text("My Machines",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .displaySmall
-                                      ?.copyWith(fontWeight: FontWeight.bold)),
+                                  style:
+                                      Theme.of(context).textTheme.displaySmall?.copyWith(fontWeight: FontWeight.bold)),
                               ListView.builder(
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
                                 itemCount: stats.machineXp.machines.length,
                                 itemBuilder: (context, index) {
                                   return MachinesStatsCard(
-                                    stats: stats.machineXp
-                                        .getMachineByIndex(index),
+                                    stats: stats.machineXp.getMachineByIndex(index),
                                   );
                                 },
                               ),

@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'package:intl/intl.dart';
 
 /// The factor used to calculate level progression.
@@ -171,8 +172,7 @@ class LanguageDetails {
   final int xps;
 
   /// Creates a new LanguageDetails instance.
-  LanguageDetails(
-      {required this.name, required this.newXps, required this.xps});
+  LanguageDetails({required this.name, required this.newXps, required this.xps});
 
   /// Creates a LanguageDetails instance from JSON data.
   factory LanguageDetails.fromJson(Map<String, dynamic> json, String key) {

@@ -2,8 +2,8 @@ import 'package:codestats_client/models/user_settings.dart';
 import 'package:codestats_client/providers/settings_provider.dart';
 import 'package:codestats_client/providers/stats_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -36,19 +36,13 @@ class _SettingsPageState extends State<SettingsPage> {
             trailing: SegmentedButton<int>(
               segments: [
                 ButtonSegment(
-                    value: 0,
-                    icon: Icon(Icons
-                        .light_mode) //, color: Theme.of(context).primaryIconTheme.color),
+                    value: 0, icon: Icon(Icons.light_mode) //, color: Theme.of(context).primaryIconTheme.color),
                     ),
                 ButtonSegment(
-                    value: 1,
-                    icon: Icon(Icons
-                        .smartphone) //, color: Theme.of(context).primaryIconTheme.color),
+                    value: 1, icon: Icon(Icons.smartphone) //, color: Theme.of(context).primaryIconTheme.color),
                     ),
                 ButtonSegment(
-                    value: 2,
-                    icon: Icon(Icons
-                        .dark_mode) //, color: Theme.of(context).primaryIconTheme.color),
+                    value: 2, icon: Icon(Icons.dark_mode) //, color: Theme.of(context).primaryIconTheme.color),
                     ),
               ],
               showSelectedIcon: false,
@@ -86,8 +80,7 @@ class _SettingsPageState extends State<SettingsPage> {
             leading: const Icon(Icons.book),
             title: const Text('GitHub Repository'),
             subtitle: const Text('View source code'),
-            onTap: () => launchUrl(Uri.parse(
-                'https://github.com/HarshNarayanJha/codestats_client')),
+            onTap: () => launchUrl(Uri.parse('https://github.com/HarshNarayanJha/codestats_client')),
           ),
           AboutListTile(
             icon: const Icon(Icons.info),
@@ -98,8 +91,7 @@ class _SettingsPageState extends State<SettingsPage> {
             aboutBoxChildren: [
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 8.0),
-                child:
-                    Text('A mobile client for Code::Stats written in Flutter'),
+                child: Text('A mobile client for Code::Stats written in Flutter'),
               ),
             ],
           ),
@@ -130,12 +122,8 @@ class _SettingsPageState extends State<SettingsPage> {
     await prefs.setString(SettingsPage.keyUsername, username ?? '');
 
     if (mounted && darkMode != null && username != null) {
-      context
-          .read<SettingsProvider>()
-          .setSettings(UserSettings(darkMode: darkMode!, username: username!));
-      context
-          .read<StatsProvider>()
-          .fetchStats(context.read<SettingsProvider>().settings!);
+      context.read<SettingsProvider>().setSettings(UserSettings(darkMode: darkMode!, username: username!));
+      context.read<StatsProvider>().fetchStats(context.read<SettingsProvider>().settings!);
     }
   }
 }

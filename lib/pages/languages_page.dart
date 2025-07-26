@@ -16,11 +16,10 @@ class LanguagesPage extends StatefulWidget {
 }
 
 class _LanguagesPageState extends State<LanguagesPage> {
-  _fetchStats() async {
+  Future<void> _fetchStats() async {
     if (context.mounted) {
       final statsProvider = Provider.of<StatsProvider>(context, listen: false);
-      final settingsProvider =
-          Provider.of<SettingsProvider>(context, listen: false);
+      final settingsProvider = Provider.of<SettingsProvider>(context, listen: false);
 
       if (settingsProvider.settings == null) {
         await settingsProvider.loadSettings();
@@ -78,26 +77,20 @@ class _LanguagesPageState extends State<LanguagesPage> {
                     ? Center(child: CircularProgressIndicator())
                     : SingleChildScrollView(
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 8.0, right: 8.0, top: 16.0, bottom: 8.0),
+                          padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 16.0, bottom: 8.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             spacing: 16.0,
                             children: [
                               Text("My Languages",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .displaySmall
-                                      ?.copyWith(fontWeight: FontWeight.bold)),
+                                  style:
+                                      Theme.of(context).textTheme.displaySmall?.copyWith(fontWeight: FontWeight.bold)),
                               ResponsiveLayout(
                                 desktopBody: GridView.builder(
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
-                                  gridDelegate:
-                                      SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount:
-                                        MediaQuery.of(context).size.width ~/
-                                            300,
+                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: MediaQuery.of(context).size.width ~/ 300,
                                     childAspectRatio: 2,
                                     crossAxisSpacing: 5,
                                     mainAxisSpacing: 5,
@@ -105,8 +98,7 @@ class _LanguagesPageState extends State<LanguagesPage> {
                                   itemCount: stats.languageXp.languages.length,
                                   itemBuilder: (context, index) {
                                     return LanguageStatsCard(
-                                      stats: stats.languageXp
-                                          .getLanguageByIndex(index),
+                                      stats: stats.languageXp.getLanguageByIndex(index),
                                     );
                                   },
                                 ),
@@ -116,8 +108,7 @@ class _LanguagesPageState extends State<LanguagesPage> {
                                   itemCount: stats.languageXp.languages.length,
                                   itemBuilder: (context, index) {
                                     return LanguageStatsCard(
-                                      stats: stats.languageXp
-                                          .getLanguageByIndex(index),
+                                      stats: stats.languageXp.getLanguageByIndex(index),
                                     );
                                   },
                                 ),

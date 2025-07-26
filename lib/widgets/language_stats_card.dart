@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:codestats_client/models/user_stats.dart';
 import 'package:codestats_client/utils/language_utils.dart';
+import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class LanguageStatsCard extends StatelessWidget {
@@ -45,16 +45,11 @@ class LanguageStatsCard extends StatelessWidget {
                                     .primaryTextTheme
                                     .titleLarge
                                     ?.copyWith(fontWeight: FontWeight.w600)),
-                            Text(
-                                '${stats.getTotalXpF()} XP (+ ${stats.getNewXpF()} XP)',
-                                style: Theme.of(context)
-                                    .primaryTextTheme
-                                    .bodySmall),
+                            Text('${stats.getTotalXpF()} XP (+ ${stats.getNewXpF()} XP)',
+                                style: Theme.of(context).primaryTextTheme.bodySmall),
                             Text(
                                 '${stats.getXpToNextLevel() - (stats.xps - xpToNextLevel(stats.getLevel() - 1))} XP to next level',
-                                style: Theme.of(context)
-                                    .primaryTextTheme
-                                    .bodySmall),
+                                style: Theme.of(context).primaryTextTheme.bodySmall),
                           ],
                         ),
                         Stack(
@@ -70,9 +65,7 @@ class LanguageStatsCard extends StatelessWidget {
                             ),
                             CircularPercentIndicator(
                               percent: (levelProgress((stats.xps - stats.newXps)
-                                      .clamp(
-                                          xpToNextLevel(stats.getLevel() - 1),
-                                          xpToNextLevel(stats.getLevel())))) /
+                                      .clamp(xpToNextLevel(stats.getLevel() - 1), xpToNextLevel(stats.getLevel())))) /
                                   100.0,
                               progressColor: Colors.lightGreen,
                               backgroundColor: Colors.transparent,

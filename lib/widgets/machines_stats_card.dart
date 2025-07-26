@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:codestats_client/models/user_stats.dart';
+import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class MachinesStatsCard extends StatelessWidget {
@@ -36,12 +36,8 @@ class MachinesStatsCard extends StatelessWidget {
                       ),
                       SizedBox(height: 5.0),
                       Text('Level ${stats.getLevel()}',
-                          style: Theme.of(context)
-                              .primaryTextTheme
-                              .titleLarge
-                              ?.copyWith(fontWeight: FontWeight.w600)),
-                      Text(
-                          '${stats.getTotalXpF()} XP (+ ${stats.getNewXpF()} XP)',
+                          style: Theme.of(context).primaryTextTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
+                      Text('${stats.getTotalXpF()} XP (+ ${stats.getNewXpF()} XP)',
                           style: Theme.of(context).primaryTextTheme.bodySmall),
                       Text(
                           '${stats.getXpToNextLevel() - (stats.xps - xpToNextLevel(stats.getLevel() - 1))} XP to next level',
@@ -61,8 +57,7 @@ class MachinesStatsCard extends StatelessWidget {
                       ),
                       CircularPercentIndicator(
                         percent: (levelProgress((stats.xps - stats.newXps)
-                                .clamp(xpToNextLevel(stats.getLevel() - 1),
-                                    xpToNextLevel(stats.getLevel())))) /
+                                .clamp(xpToNextLevel(stats.getLevel() - 1), xpToNextLevel(stats.getLevel())))) /
                             100.0,
                         progressColor: Colors.lightGreen,
                         backgroundColor: Colors.transparent,
@@ -70,10 +65,8 @@ class MachinesStatsCard extends StatelessWidget {
                         lineWidth: 16.0,
                         animation: true,
                         center: Text(stats.getLevelProgressF(),
-                            style: Theme.of(context)
-                                .primaryTextTheme
-                                .labelLarge
-                                ?.copyWith(fontWeight: FontWeight.bold)),
+                            style:
+                                Theme.of(context).primaryTextTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold)),
                       ),
                     ],
                   ),

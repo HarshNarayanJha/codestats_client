@@ -1,6 +1,6 @@
+import 'package:codestats_client/models/user_stats.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:codestats_client/models/user_stats.dart';
 
 class MainStatsCard extends StatelessWidget {
   const MainStatsCard({super.key, required this.stats});
@@ -23,15 +23,9 @@ class MainStatsCard extends StatelessWidget {
             children: [
               Row(),
               Text('Level ${stats.getLevel()}',
-                  style: Theme.of(context)
-                      .primaryTextTheme
-                      .displaySmall
-                      ?.copyWith(fontWeight: FontWeight.w900)),
+                  style: Theme.of(context).primaryTextTheme.displaySmall?.copyWith(fontWeight: FontWeight.w900)),
               Text('${stats.getTotalXpF()} XP (+ ${stats.getNewXpF()} XP)',
-                  style: Theme.of(context)
-                      .primaryTextTheme
-                      .titleMedium
-                      ?.copyWith(fontWeight: FontWeight.w400)),
+                  style: Theme.of(context).primaryTextTheme.titleMedium?.copyWith(fontWeight: FontWeight.w400)),
               SizedBox(height: 5.0),
               Stack(
                 alignment: Alignment.center,
@@ -45,9 +39,8 @@ class MainStatsCard extends StatelessWidget {
                     animation: true,
                   ),
                   LinearPercentIndicator(
-                    percent: (levelProgress((stats.totalXp - stats.newXp).clamp(
-                            xpToNextLevel(stats.getLevel() - 1),
-                            xpToNextLevel(stats.getLevel())))) /
+                    percent: (levelProgress((stats.totalXp - stats.newXp)
+                            .clamp(xpToNextLevel(stats.getLevel() - 1), xpToNextLevel(stats.getLevel())))) /
                         100.0,
                     progressColor: Colors.lightGreen,
                     backgroundColor: Colors.transparent,
@@ -55,10 +48,7 @@ class MainStatsCard extends StatelessWidget {
                     lineHeight: 20.0,
                     animation: true,
                     center: Text(stats.getLevelProgressF(),
-                        style: Theme.of(context)
-                            .primaryTextTheme
-                            .labelLarge
-                            ?.copyWith(fontWeight: FontWeight.bold)),
+                        style: Theme.of(context).primaryTextTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold)),
                   ),
                 ],
               ),
@@ -71,15 +61,9 @@ class MainStatsCard extends StatelessWidget {
                       '${stats.getXpToNextLevel() - (stats.totalXp - xpToNextLevel(stats.getLevel() - 1))} XP to next level',
                       style: Theme.of(context).primaryTextTheme.bodySmall),
                   Text("User Since: ${stats.getUserSinceF()}",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodySmall
-                          ?.copyWith(color: Colors.grey.shade400)),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.grey.shade400)),
                   Text("Last programmed on: ${stats.getLastProgrammedF()}",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodySmall
-                          ?.copyWith(color: Colors.grey.shade400)),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.grey.shade400)),
                 ],
               ),
             ],

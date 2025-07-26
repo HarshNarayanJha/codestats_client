@@ -1,0 +1,136 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.Android.AppWidget.Container"
+    android:id="@+id/widget_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:padding="24dp"
+    android:theme="@style/Theme.Android.AppWidgetContainer"
+>
+
+    <TextView
+        android:id="@+id/statswidget_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:text="username"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+    />
+
+    <TextView
+        android:id="@+id/statswidget_level_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/statswidget_username"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:text="Level XX"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        android:textStyle="bold"
+    />
+
+    <TextView
+        android:id="@+id/statswidget_current_xp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/statswidget_level_text"
+        android:layout_alignParentStart="true"
+        android:text="100 XP (+ 10 XP)"
+        android:textColor="#555555"
+        android:textSize="14sp"
+    />
+
+    <RelativeLayout
+        android:id="@+id/progress_area"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@id/statswidget_current_xp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+    >
+
+        <ImageView
+            android:id="@+id/statswidget_progress_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+        />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/languages_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/statswidget_current_xp"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical"
+    >
+
+        <TextView
+            android:id="@+id/statswidget_lang1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Language 1"
+            android:textColor="#FFA500"
+            android:textSize="16sp"
+            android:textStyle="bold"
+        />
+
+        <TextView
+            android:id="@+id/statswidget_lang2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Language 2"
+            android:textColor="#007ACC"
+            android:textSize="16sp"
+            android:layout_marginTop="4dp"
+            android:textStyle="bold"
+        />
+
+        <TextView
+            android:id="@+id/statswidget_lang3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Language 3"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:layout_marginTop="4dp"
+            android:textStyle="bold"
+        />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/statswidget_xp_to_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="24dp"
+        android:text="200 XP to next level"
+        android:textColor="#333333"
+        android:textSize="14sp"
+    />
+
+    <TextView
+        android:id="@+id/statswidget_last_programmed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:text="Last programmed on: May 09, 2025"
+        android:textColor="#777777"
+        android:textSize="12sp"
+    />
+
+</RelativeLayout>

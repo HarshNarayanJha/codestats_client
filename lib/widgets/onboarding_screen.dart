@@ -195,17 +195,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Future<bool> checkUsername(String username) async {
     // try to fetch the stats
     log("Trying to check for username");
-    try {
-      final fetchedStats = await context
-          .read<StatsProvider>()
-          .fetchStats(UserSettings(darkMode: 1, username: username, onBoardingCompleted: false));
-      if (fetchedStats != null && fetchedStats.languageXp.languages.isNotEmpty) {
-        _stats = fetchedStats;
-      }
-    } catch (e) {
-      // exception, probably 404, will check, return false
+    final fetchedStats = await context
+        .read<StatsProvider>()
+        .fetchStats(UserSettings(darkMode: 1, username: username, onBoardingCompleted: false));
+
+    if (fetchedStats == null) {
+      // probably 404, will check, return false
       log("username was not found");
       return false;
+    } else {
+      if (fetchedStats.languageXp.languages.isNotEmpty) {
+        _stats = fetchedStats;
+      }
     }
 
     log("username is valid");

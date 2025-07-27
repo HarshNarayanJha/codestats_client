@@ -183,6 +183,10 @@ class LanguageDetails {
     );
   }
 
+  factory LanguageDetails.sample() {
+    return LanguageDetails(name: "Python", newXps: 245, xps: 567920);
+  }
+
   /// Converts the LanguageDetails instance to a JSON map.
   Map<String, dynamic> toJson() {
     return {
@@ -383,7 +387,7 @@ class UserStats {
       user: '',
       newXp: 13858,
       dateXp: DateXp(dates: {}),
-      languageXp: LanguageXp(languages: {}),
+      languageXp: LanguageXp(languages: {"Python": LanguageDetails.sample()}),
     );
   }
 

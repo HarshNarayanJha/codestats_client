@@ -1,14 +1,16 @@
 import 'package:codestats_client/models/user_settings.dart';
 import 'package:codestats_client/providers/settings_provider.dart';
 import 'package:codestats_client/providers/stats_provider.dart';
+import 'package:codestats_client/router/router.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatefulWidget {
   static const keyDarkMode = "dark_mode";
   static const keyUsername = "username";
+  static const keyOnboardingCompleted = "onboarding_completed";
 
   const SettingsPage({super.key});
 
@@ -19,6 +21,7 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   int? darkMode;
   String? username;
+  bool? onBoardingCompleted;
 
   final TextEditingController _usernameController = TextEditingController();
 
@@ -95,6 +98,22 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ],
           ),
+          ListTile(
+            leading: Icon(
+              Icons.restart_alt_rounded,
+              color: Theme.of(context).colorScheme.error,
+            ),
+            title: Text("Reset onboarding",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.error,
+                )),
+            onTap: () {
+              showAdaptiveDialog(
+                context: context,
+                builder: (context) => ResetOnboardingAlertDialog(onReset: resetOnboarding),
+              );
+            },
+          ),
         ],
       ),
     );
@@ -106,24 +125,60 @@ class _SettingsPageState extends State<SettingsPage> {
     super.initState();
   }
 
+  Future<void> resetOnboarding() async {
+    await context.read<SettingsProvider>().resetOnboarding();
+    if (mounted) {
+      context.go(Routes.homePage);
+    }
+  }
+
   Future<void> loadSettings() async {
-    final prefs = await SharedPreferences.getInstance();
+    final settings = await context.read<SettingsProvider>().loadSettings();
     setState(() {
-      darkMode = prefs.getInt(SettingsPage.keyDarkMode);
-      username = prefs.getString(SettingsPage.keyUsername);
+      darkMode = settings.darkMode;
+      username = settings.username;
+      onBoardingCompleted = settings.onBoardingCompleted;
     });
 
     _usernameController.text = username ?? '';
   }
 
   Future<void> saveSettings() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(SettingsPage.keyDarkMode, darkMode ?? 1);
-    await prefs.setString(SettingsPage.keyUsername, username ?? '');
+    final settings = await context
+        .read<SettingsProvider>()
+        .setSettings(UserSettings(darkMode: darkMode!, username: username!, onBoardingCompleted: onBoardingCompleted!));
 
-    if (mounted && darkMode != null && username != null) {
-      context.read<SettingsProvider>().setSettings(UserSettings(darkMode: darkMode!, username: username!));
-      context.read<StatsProvider>().fetchStats(context.read<SettingsProvider>().settings!);
+    if (mounted) {
+      await context.read<StatsProvider>().fetchStats(settings);
     }
+  }
+}
+
+class ResetOnboardingAlertDialog extends StatelessWidget {
+  final VoidCallback onReset;
+
+  const ResetOnboardingAlertDialog({super.key, required this.onReset});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text("Clear saved data?"),
+      icon: Icon(Icons.delete),
+      content: Text(
+          "All your data will be deleted from this device. Your stats on the code-stats.net server will NOT be deleted."),
+      actions: [
+        TextButton(
+          onPressed: onReset,
+          child: Text(
+            'Clear',
+            style: TextStyle(color: Theme.of(context).colorScheme.error, fontWeight: FontWeight.bold),
+          ),
+        ),
+        TextButton(
+          onPressed: () => context.pop(),
+          child: const Text('No'),
+        )
+      ],
+    );
   }
 }

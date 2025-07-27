@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:codestats_client/providers/settings_provider.dart';
 import 'package:codestats_client/providers/stats_provider.dart';
 import 'package:codestats_client/router/router.dart';
 import 'package:codestats_client/theme/theme.dart';
 import 'package:codestats_client/theme/util.dart';
+import 'package:codestats_client/widgets/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl_standalone.dart';
@@ -50,13 +53,36 @@ class CodeStatsApp extends StatelessWidget {
     TextTheme textTheme = createTextTheme(context, "JetBrains Mono", "Nunito");
     MaterialTheme theme = MaterialTheme(textTheme);
 
+    final needsOnboarding = (settings.settings?.onBoardingCompleted ?? false) == false;
+
     return MaterialApp.router(
-        title: 'Code::Stats',
-        themeAnimationDuration: Duration(milliseconds: 50),
-        themeAnimationCurve: Curves.decelerate,
-        themeMode: themeMode,
-        theme: theme.light(),
-        darkTheme: theme.dark(),
-        routerConfig: router);
+      title: 'Code::Stats',
+      themeAnimationDuration: Duration(milliseconds: 50),
+      themeAnimationCurve: Curves.decelerate,
+      themeMode: themeMode,
+      theme: theme.light(),
+      darkTheme: theme.dark(),
+      builder: (context, child) {
+        if (needsOnboarding) {
+          log("Onboarding not completed");
+          return Overlay(
+            initialEntries: [
+              OverlayEntry(builder: (context) {
+                return OnboardingScreen(onDone: () {
+                  onOnboardingDone(context);
+                });
+              })
+            ],
+          );
+        }
+
+        return child!;
+      },
+      routerConfig: router,
+    );
+  }
+
+  Future<void> onOnboardingDone(BuildContext context) async {
+    await context.read<SettingsProvider>().completeOnboarding();
   }
 }

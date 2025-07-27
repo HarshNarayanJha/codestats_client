@@ -24,14 +24,18 @@ class StatsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> fetchStats(UserSettings userSettings) async {
+  Future<UserStats?> fetchStats(UserSettings userSettings) async {
     String user = userSettings.username;
 
+    log("Fetching user stats");
     try {
       final stats = await _statsService.getStats(user);
       setStats(stats);
+      return stats;
     } catch (e) {
       log(e.toString());
     }
+
+    return null;
   }
 }

@@ -4,6 +4,7 @@ A sleek mobile client for viewing your Code::Stats analytics and tracking your c
 
 ## 🚀 Upcoming Features
 
+- [X] User Onboarding
 - [ ] Home Screen Widgets
 - [ ] Top Languages Dashboard
 - [ ] Language Progress Tracking
@@ -23,7 +24,9 @@ A sleek mobile client for viewing your Code::Stats analytics and tracking your c
 
 Download the latest version from our releases section. The app is currently in beta phase.
 
-Important: After installation, please navigate to the app settings (top-right corner) to set your username. This is required for the app to load properly - without it, the home screen loading indicator will continue spinning indefinitely.
+~~Important: After installation, please navigate to the app settings (top-right corner) to set your username. This is required for the app to load properly - without it, the home screen loading indicator will continue spinning indefinitely.~~
+
+Onboarding has been implemented.
 
 ## 📱 Screenshots
 
@@ -39,3 +42,19 @@ Important: After installation, please navigate to the app settings (top-right co
     <em>Left to right: Home Page, Languages, Machines, Settings, Home Page (Dark Mode)</em>
   </p>
 </div>
+
+
+## Releasing a new version
+
+How to release a new version
+
+1. Bump version in `pubspec.yaml`
+2. Bump version in `settings_page.dart`, `local.properties` (need to make this automatic)
+3. `git add .`
+4. `git commit -m "Release vx.y.z"`
+5. `git tag -a vx.y.z <last_commit_hash>`
+6. `git push --all`
+7. `git push --tags`
+8. `flutter build apk --split-per-abi --release`
+9. Create a new release on GitHub and upload assets
+10. Tell people

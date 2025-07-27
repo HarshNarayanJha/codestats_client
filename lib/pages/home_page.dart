@@ -87,14 +87,14 @@ class _HomePageState extends State<HomePage> {
                       spacing: 15.0,
                       children: <Widget>[
                         Text(
-                          "Welcome ${stats.user}!",
+                          "Welcome ${stats.user}",
                           style: Theme.of(context).textTheme.displaySmall?.copyWith(fontWeight: FontWeight.bold),
                         ),
                         MainStatsCard(stats: stats),
                         DayStats(stats: stats),
                         Divider(thickness: 0.5),
                         Text(
-                          "Languages you speak!",
+                          "Languages",
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         ResponsiveLayout(
@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Text(
-                          "Your Year in a Glance",
+                          "Year at a Glance",
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         HeatMap(

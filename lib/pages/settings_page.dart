@@ -87,7 +87,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           AboutListTile(
             icon: const Icon(Icons.info),
-            applicationVersion: "1.0.0-beta1",
+            applicationVersion: "1.0.0-beta2",
             applicationName: "Code::Stats Client",
             applicationIcon: const Icon(Icons.bar_chart),
             applicationLegalese: "© 2025 Harsh Narayan Jha",
